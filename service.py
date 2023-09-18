@@ -55,3 +55,10 @@ async def invocation(input_img):
 async def render(input_img):
     batch_ret = await yolo_v5_runner.render.async_run([input_img])
     return batch_ret[0]
+
+
+## commands to run it
+## first run command in download_model.py
+# >>> bentoml serve service:svc
+# now the service is active and you can do whatever you want
+# reference: https://docs.bentoml.org/en/latest/quickstarts/deploy-a-yolo-model-with-bentoml.html

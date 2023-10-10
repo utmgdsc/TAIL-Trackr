@@ -1,0 +1,77 @@
+.features-div{
+    justify-content: center;
+    margin: 0 10%;
+    padding: 5% 0;
+}
+.features-title{
+    margin-bottom: 1rem;
+    color: #ffffff;
+    text-align: left;
+    padding-right: 10%;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-family: 'Roboto', cursive;
+    font-weight: 700;
+    font-size: 46px;
+}
+
+.features-title::after{
+    content: '';
+    display: block;
+    width: 25%;
+    height: 4px;
+    background-color: #FFFFFF;
+    margin-top: 5px;
+    margin-bottom: 10px;
+}
+
+.features-title:hover{
+    color: #4dc020;
+    margin-left: 10px;
+    font-size: 50px;
+    transition: 0.3s;
+}
+
+.features-description:hover{
+    margin-left: 20px;
+    font-size: 21px;
+    font-weight: 300;
+    transition: 0.3s;
+
+}
+.features-description{
+    list-style-type: '🐕';
+    padding-inline-start: 1ch;
+    color: #FFFFFF;
+    font-size: 18px;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 400;
+    margin: 20px 0;
+    white-space: nowrap;
+}
+
+.features-slogan{
+    color: #FFFFFF;
+    display: block;
+    text-align: center;
+    font-size: 20px;
+    text-align: center;
+    font-family: 'Roboto';
+    justify-content: center;
+    font-weight: 400;
+    padding-top: 25px;
+}
+
+.features-slogan:hover{
+    color: #4dc020;
+    transition: 0.3s;
+    font-size: 22px;
+    font-weight: 700;
+    display: block;
+    text-align: center;
+    font-family: 'Roboto';
+    justify-content: center;
+    font-weight: 400;
+    margin-bottom: 10px;
+    margin-top: 10px;
+}

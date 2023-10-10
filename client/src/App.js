@@ -1,10 +1,15 @@
 import React, { Component } from "react";
+import MainPage from "./components/MainPage.jsx"
+import NavBar from "./components/NavBar.jsx";
+import Features from "./components/Features.jsx";
+import "./App.css";
 
 
 // app component will 
 // 1. allow image input
 // 2. on submission, convert image to bytecode and send to back-end
 class App extends Component {
+  
   constructor() {
     super();
     this.state = {
@@ -46,7 +51,10 @@ class App extends Component {
 
   render() {
     return (
-      <div>
+      <div className="App-Main">
+        <NavBar />
+        <MainPage />
+        <Features />
         <h1>Upload Image of Animal Here</h1>
 
         {this.state.selectedImage && (

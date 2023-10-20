@@ -1,8 +1,22 @@
 from flask import Flask, request
-from pymongo import MongoClient
+from pymongo.mongo_client import MongoClient
+from pymongo.server_api import ServerApi
+import json
 
 app = Flask(__name__)
-client = MongoClient('127.0.0.1', 27017)
+
+user = ""
+password = ""
+with open("credentials.json", "r") as json_file:
+    data = json.load(json_file)
+    user = data["user"]
+    password = data["password"]
+
+uri = f'mongodb+srv://{user}:{password}@login.fwh5tj6.mongodb.net/?retryWrites=true&w=majority'
+
+# Create a new client and connect to the server
+client = MongoClient(uri, server_api=ServerApi('1'))
+
 db = client['Tail-TrackR']
 collection = db['User']
 

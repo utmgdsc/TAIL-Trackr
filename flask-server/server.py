@@ -67,7 +67,10 @@ def login():
     user_info = request.get_json()
 
     userID = user_info["username"]
-    password = user_info["password"]
+    userID = user_info["email"]
+    password1 = user_info["password1"]
+    password2 = user_info["password2"]
+    
     # userID = "User1"
     # password = "Password1"
     document = {

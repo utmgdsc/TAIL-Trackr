@@ -8,6 +8,12 @@
   min-height: 100vh;
 }
 
+.App-Main{
+  background-color: #292C33;
+  width: fill-available;
+  height: fill-available;
+}
+
 .App-logo {
   height: 40vmin;
   pointer-events: none;

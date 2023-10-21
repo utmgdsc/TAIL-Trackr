@@ -1,6 +1,7 @@
 import React, { Component } from "react";
-import Header from "./components/Header.js";
-import Intro from "./components/Intro.js";
+import MainPage from "./components/MainPage.jsx"
+import NavBar from "./components/NavBar.jsx";
+import Features from "./components/Features.jsx";
 import "./App.css";
 
 
@@ -8,6 +9,7 @@ import "./App.css";
 // 1. allow image input
 // 2. on submission, convert image to bytecode and send to back-end
 class App extends Component {
+  
   constructor() {
     super();
     this.state = {
@@ -49,44 +51,41 @@ class App extends Component {
 
   render() {
     return (
-      <div className="background">
-        <Header />
-        <Intro />
+      <div className="App-Main">
+        <NavBar />
+        <MainPage />
+        <Features />
+        <h1>Upload Image of Animal Here</h1>
+
+        {this.state.selectedImage && (
+          <div>
+            <img
+              alt="not found"
+              width={"250px"}
+              src={URL.createObjectURL(this.state.selectedImage)}
+            />
+            <br />
+            {/* <button onClick={() => this.setState({ selectedImage: null })}>
+              Remove
+            </button> */}
+            <button onClick={this.handleSubmit}>Submit</button>
+          </div>
+        )}
+
+        <br />
+        <br />
+
+        <input
+          type="file"
+          name="myImage"
+          onChange={(event) => {
+            console.log(event.target.files[0]);
+            this.setState({ selectedImage: event.target.files[0] });
+          }}
+        />
       </div>
-
-      // <div>
-      //   <h1>TAILTRACKr</h1>
-
-      //   {this.state.selectedImage && (
-      //     <div>
-      //       <img
-      //         alt="not found"
-      //         width={"250px"}
-      //         src={URL.createObjectURL(this.state.selectedImage)}
-      //       />
-      //       <br />
-      //       {/* <button onClick={() => this.setState({ selectedImage: null })}>
-      //         Remove
-      //       </button> */}
-      //       <button onClick={this.handleSubmit}>Submit</button>
-      //     </div>
-      //   )}
-
-      //   <br />
-      //   <br />
-
-      //   <input
-      //     type="file"
-      //     name="myImage"
-      //     onChange={(event) => {
-      //       console.log(event.target.files[0]);
-      //       this.setState({ selectedImage: event.target.files[0] });
-      //     }}
-      //   />
-      // </div>
     );
   }
-
 }
 
 export default App;

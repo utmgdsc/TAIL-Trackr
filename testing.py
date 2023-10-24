@@ -64,11 +64,10 @@ def predictor(img):
 
 
 
-url = 'https://upload.wikimedia.org/wikipedia/commons/d/d0/German_Shepherd_-_DSC_0346_%2810096362833%29.jpg'
+url = 'https://www.akc.org/wp-content/uploads/2017/11/Siberian-Husky-standing-outdoors-in-the-winter.jpg'
 response = requests.get(url)
 img = load_img(BytesIO(response.content), target_size=DIMS)
 
 val,prob = predictor(img)
 
 print(val,prob)
-    

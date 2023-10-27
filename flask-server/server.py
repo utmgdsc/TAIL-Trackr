@@ -1,36 +1,26 @@
 from flask import Flask, request
-from pymongo.mongo_client import MongoClient
-from pymongo.server_api import ServerApi
-import json
+from flask_cors import CORS
+from db_manager import db_manager
 
+# added cors in case we change route in the future
 app = Flask(__name__)
+CORS(app)
 
-user = ""
-password = ""
-with open("credentials.json", "r") as json_file:
-    data = json.load(json_file)
-    user = data["user"]
-    password = data["password"]
+from user import User
 
-uri = f'mongodb+srv://{user}:{password}@login.fwh5tj6.mongodb.net/?retryWrites=true&w=majority'
+# obtaining the active MongoClient
+client = db_manager()
 
-# Create a new client and connect to the server
-client = MongoClient(uri, server_api=ServerApi('1'))
-
+# obtaining collections/database
 db = client['Tail-TrackR']
 collection = db['User']
 
+
+# home route
 @app.route("/", methods=["GET"])
 def home():
-    userID = "User1"
-    password = "Password1"
-    document = {
-        "UserID": userID,
-        "Password": password
-    }
-    collection.insert_one(document)
 
-    return {"response": "Complete"}
+    return {"response": "Route is connected"}
 
 # for image upload
 @app.route("/api/upload/", methods=["POST"])
@@ -42,53 +32,19 @@ def upload_image():
     return {"response": "Data Received"}
 
 # for registration
-@app.route("/api/register/", methods=["POST"])
+@app.route("/api/user/register/", methods=["POST"])
 def register():
-    user_info = request.get_json()
-    userID = user_info["username"]
-    password = user_info["password"]
-
-    # userID = "User1"
-    # password = "Password1"
-    document = {
-        "UserID": userID,
-        "Password": password
-    }
-
-    # TODO: add password encoding with hashing and salt
-    # TODO: add error handling
-
-    collection.insert_one(document)
-    return {"response": f"User successfully registered {userID}"}
+    return User().register(db)
 
 # for login
-@app.route("/api/login/", methods=["POST"])
+@app.route("/api/user/login/", methods=["POST"])
 def login():
-    user_info = request.get_json()
-
-    userID = user_info["username"]
-    userID = user_info["email"]
-    password1 = user_info["password1"]
-    password2 = user_info["password2"]
-    
-    # userID = "User1"
-    # password = "Password1"
-    document = {
-        "UserID": userID,
-        "Password": password
-    }
-
     # TODO: add password decoding and compare to original password, using salt
     # TODO: add error handling
     # TODO: add response indicating whether credentials are correct or not, and respective pages to visit
 
-
-    user = collection.find_one(document)
-    if user:
-        return {"response": f"User successfully logged in {userID}"}
-    else:
-        return {"response": "Incorrect credentials"}
+    return {"response": "Incorrect credentials"}
     
-
+# running the app
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(debug=True, port=5000)

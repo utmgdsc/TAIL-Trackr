@@ -25,11 +25,11 @@ from tensorflow.keras.applications.vgg19 import VGG19
 from tensorflow.keras.applications.mobilenet_v2 import MobileNetV2
 from tensorflow.keras.applications.xception import Xception
 
-model = tf.keras.models.load_model('model.h5')
+model = tf.keras.models.load_model('dogmodel.h5')
 
-TRAIN_DIR = 'train'
-VAL_DIR = 'valid'
-TEST_DIR = 'test'
+TRAIN_DIR = 'dog data/train'
+VAL_DIR = 'dog data/valid'
+TEST_DIR = 'dog data/test'
 
 DIMS = (224,224)
 IMG_SIZE = 224

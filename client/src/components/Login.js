@@ -1,15 +1,42 @@
-import React, { Component } from "react";
-import NavBar from "./NavBar.jsx";
-import { useState } from "react";
-// import { useAuthContext } from "./useAuthContext";
-//import "./Login.css";
+import React, { useState } from 'react';
+import './Login.css';
 
+export default function Login() {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
 
-// TODO add code in this section to deal with user login and authentication accordingly
-export default class Login extends Component {
-  render() {
-    return (
-        <div></div>
-    )
-  }
+  const handleSubmit = () => {
+    // Handle login submission
+  };
+
+  return (
+    <div className="container">
+      <form name="login-form">
+        <h1>Login</h1>
+        <h2>Enter your credentials to log in</h2>
+
+        <label htmlFor="email">Email</label>
+        <input
+          type="email"
+          onChange={(e) => setEmail(e.target.value)}
+          value={email}
+          name="email"
+          className="field"
+          required
+        />
+
+        <label htmlFor="password">Password</label>
+        <input
+          type="password"
+          name="password"
+          onChange={(e) => setPassword(e.target.value)}
+          value={password}
+          className="field"
+          required
+        />
+
+        <button onClick={() => handleSubmit()}>Log In</button>
+      </form>
+    </div>
+  );
 }

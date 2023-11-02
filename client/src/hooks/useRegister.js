@@ -31,9 +31,9 @@ export default function useRegister() {
         }
         if (response.ok) {
             // save user to local storage
-            // localStorage.setItem("user", JSON.stringify(json))
+            localStorage.setItem("user", JSON.stringify(json))
 
-            // // update auth context
+            // update auth context
             // dispatch({type: "LOGIN", payload: json})
             setIsLoading(false)
         }

@@ -1,4 +1,4 @@
-/* Register.css */
+/* Login.css */
 .container {
     display: flex;
     justify-content: center;
@@ -7,7 +7,7 @@
     background-color: rgba(0, 0, 0, 0.5); /* Darker background overlay */
   }
   
-  .form {
+  form {
     background-color: #6c6f77; /* Darker background for the form */
     padding: 50px;
     padding-bottom: 90px;

@@ -15,7 +15,9 @@ export default function Register () {
     }
     return (
         <div>
-        <form name="login-form">
+        <h1>Register</h1>
+        <h2>Register to make an account to be one step closer to find your missing pet</h2>
+        <form className="form" name="login-form">
 
             <label htmlFor="email">Email</label>
             <input 
@@ -23,6 +25,7 @@ export default function Register () {
                 onChange={(e) => setEmail(e.target.value)} 
                 value={email}
                 name="email" 
+                placeholder="Email"
                 className="field" 
                 required
             />
@@ -31,6 +34,7 @@ export default function Register () {
             <input 
                 type="password" 
                 name="password" 
+                placeholder="Password"
                 onChange={(e) => setPassword(e.target.value)} 
                 value={password}
                 className="field" 

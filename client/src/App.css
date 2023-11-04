@@ -48,3 +48,14 @@
     transform: rotate(360deg);
   }
 }
+
+/* In your CSS file */
+.NavBar {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  background-color: #333;
+  z-index: 100;
+}
+
+

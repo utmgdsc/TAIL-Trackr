@@ -1,42 +1,63 @@
-import React, { useState } from 'react';
-import './Login.css';
+import React, { useState } from "react";
+import { AccountCircle, Lock } from "@material-ui/icons";
+import useRegister from "../hooks/useRegister";
+import "./Register.css";
 
-export default function Login() {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+export default function Register() {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const { register, error, isLoading } = useRegister();
 
   const handleSubmit = () => {
-    // Handle login submission
+    // lofin(email, password);
   };
 
   return (
-    <div className="container">
-      <form name="login-form">
-        <h1>Login</h1>
-        <h2>Enter your credentials to log in</h2>
+    <div className="register-container">
+      <div className="register-content">
+        <h1>
+          Login
+        </h1>
+        <form className="form" name="login- form">
+            <div className="padding-container">
+          <div className="input-container">
+            <div className="input-icon">
+              <AccountCircle />
+            </div>
+            <input
+              type="email"
+              onChange={(e) => setEmail(e.target.value)}
+              value={email}
+              name="email"
+              placeholder="Email"
+              className="field"
+              required
+            />
+          </div>
 
-        <label htmlFor="email">Email</label>
-        <input
-          type="email"
-          onChange={(e) => setEmail(e.target.value)}
-          value={email}
-          name="email"
-          className="field"
-          required
-        />
+          <div className="input-container">
+            <div className="input-icon">
+              <Lock />
+            </div>
+            <input
+              type="password"
+              name="password"
+              placeholder="Password"
+              onChange={(e) => setPassword(e.target.value)}
+              value={password}
+              className="field"
+              required
+            />
+          </div>
+          </div>
 
-        <label htmlFor="password">Password</label>
-        <input
-          type="password"
-          name="password"
-          onChange={(e) => setPassword(e.target.value)}
-          value={password}
-          className="field"
-          required
-        />
+          {error && <div className="error-message">Sorry, email is already in use.</div>}
+        </form>
 
-        <button onClick={() => handleSubmit()}>Log In</button>
-      </form>
+        <button onClick={handleSubmit} className="submit-button">
+          Login
+        </button>
+      </div>
     </div>
   );
 }

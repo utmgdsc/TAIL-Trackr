@@ -12,16 +12,16 @@ class App extends Component {
   render() {
     return (
       <div className="App">
+        <BrowserRouter>
        <NavBar />
         <main style={{ marginTop: '60px' }}> {/* Adjust the margin value based on your header's height */}
-          <BrowserRouter>
             <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/login" element={<Login />} />
               <Route path="/register" element={<Register />} />
             </Routes>
-          </BrowserRouter>
         </main>
+        </BrowserRouter>
       </div>
     );
   }

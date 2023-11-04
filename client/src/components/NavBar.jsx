@@ -11,7 +11,7 @@ function NavBar() {
       </div>
       <ul className='nav-links'>
         <li>
-          <a href='#'>Home</a>
+          <Link to="/">Home</Link>
         </li>
         <li>
           <a href='#'>About</a>

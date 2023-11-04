@@ -2,6 +2,7 @@ from flask import Flask, request
 from flask_cors import CORS
 from db_manager import db_manager
 
+
 # added cors in case we change route in the future
 app = Flask(__name__)
 CORS(app)
@@ -34,7 +35,10 @@ def upload_image():
 # for registration
 @app.route("/api/user/register/", methods=["POST"])
 def register():
-    return User().register(db)
+    print("registering")
+    output = User().register(db)
+    print("registered")
+    return output
 
 # for login
 @app.route("/api/user/login/", methods=["POST"])

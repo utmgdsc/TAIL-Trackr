@@ -1,48 +1,62 @@
-import React from "react"
-import { useState } from "react"
-import useRegister from "../hooks/useRegister"
-import "./Register.css"
+import React, { useState } from "react";
+import { AccountCircle, Lock } from "@material-ui/icons";
+import useRegister from "../hooks/useRegister";
+import "./Register.css";
 
-export default function Register () {
-    // states containing info
-    const [email, setEmail] = useState("")
-    const [password, setPassword] = useState("")
-    const {register, error, isLoading} = useRegister()
+export default function Register() {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const { register, error, isLoading } = useRegister();
 
-    // attempt to register user on form submission
-    const handleSubmit = () => {
-        register(email, password)
-    }
-    return (
-        <div>
-        <form name="login-form">
+  const handleSubmit = () => {
+    register(email, password);
+  };
 
-            <label htmlFor="email">Email</label>
-            <input 
-                type="email" 
-                onChange={(e) => setEmail(e.target.value)} 
-                value={email}
-                name="email" 
-                className="field" 
-                required
+  return (
+    <div className="register-container">
+      <div className="register-content">
+        <h1>Register</h1>
+        <h2>Register to make an account and find your missing pet</h2>
+        <form className="form" name="login- form">
+            <div className="padding-container">
+          <div className="input-container">
+            <div className="input-icon">
+              <AccountCircle />
+            </div>
+            <input
+              type="email"
+              onChange={(e) => setEmail(e.target.value)}
+              value={email}
+              name="email"
+              placeholder="Email"
+              className="field"
+              required
             />
-            
-            <label htmlFor="password">Password</label>
-            <input 
-                type="password" 
-                name="password" 
-                onChange={(e) => setPassword(e.target.value)} 
-                value={password}
-                className="field" 
-                required
+          </div>
+
+          <div className="input-container">
+            <div className="input-icon">
+              <Lock />
+            </div>
+            <input
+              type="password"
+              name="password"
+              placeholder="Password"
+              onChange={(e) => setPassword(e.target.value)}
+              value={password}
+              className="field"
+              required
             />
+          </div>
+          </div>
 
-            {error && <div>Sorry, email is already in use.</div> }
-
+          {error && <div className="error-message">Sorry, email is already in use.</div>}
         </form>
-        <button onClick={() => handleSubmit()}>
-            Submit
+
+        <button onClick={handleSubmit} className="submit-button">
+          Register
         </button>
-        </div>
-    );
+      </div>
+    </div>
+  );
 }

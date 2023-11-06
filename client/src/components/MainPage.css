@@ -1,0 +1,83 @@
+@import 'animate.css'; /* Import Animate.css */
+
+
+.main-page {
+  position: relative; /* Create a stacking context for the overlay */
+  background-color: #292C33;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  overflow: hidden; /* Hide overflowing overlay content */
+}
+
+
+/* Define a custom animation for the overlay */
+@keyframes pulse {
+  0% {
+    transform: scale(0.95);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+  
+  .main-page-txt-header {
+    color: #FFFFFF;
+    font-size: 40px;
+    font-weight: bold;
+    font-family: 'Righteous', cursive;
+  }
+  
+  .main-page-description {
+    color: #FFFFFF;
+    font-size: 18px;
+    margin: 20px 0;
+  }
+  
+  .cta-button {
+    background-color: #4dc020;
+    color: #FFFFFF;
+    padding: 10px 20px;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .cta-button:hover {
+    background-color: #E64A19;
+  }
+  .main-page-description {
+    color: #FFFFFF;
+    font-size: 18px;
+    font-family: 'Roboto';
+    font-weight: 400;
+    margin: 20px 0;
+    white-space: nowrap; /* Prevent text from wrapping */
+    overflow: hidden; /* Hide overflow text */
+  }
+  
+  /* Create a typing cursor effect */
+  .main-page-description:after {
+    content: '|'; 
+    animation: blink-caret 0.5s step-end infinite; /* Blinking cursor animation */
+    margin-left: 4px; /* Spacing between cursor and text */
+  }
+  
+  /* Keyframe animation for blinking cursor */
+  @keyframes blink-caret {
+    from,
+    to {
+      color: transparent; /* Hide cursor by making it transparent */
+    }
+    50% {
+      color: #FFFFFF; /* Show cursor by making it white */
+    }
+  }
+
+  

@@ -1,0 +1,118 @@
+/* Register container with a gradient background */
+.register-container {
+    background: linear-gradient(135deg, #292C33, #28a721);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    background: linear-gradient(180deg, #292C33, #28a721);
+  }
+  
+  /* Content container */
+  .register-content {
+    background: rgba(255, 255, 255, 0.1);
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    width: 300px;
+  }
+  
+  /* Title style */
+  h1 {
+    color: #ffffff;
+    font-size: 28px;
+    font-family: 'Roboto', sans-serif;
+    margin: 20px 0;
+  }
+  
+  /* Description style */
+  h2 {
+    color: #ffffff;
+    font-family: 'Roboto';
+    font-size: 16px;
+    margin: 10px 0;
+  }
+  
+/* Form container */
+.form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: rgba(255, 255, 255, 0); /* Transparent background */
+    width: 0px;
+    gap: 15px;
+    padding: 30px;
+    justify-content: center;
+    border: none; /* Remove border */
+    outline: none; /* Remove outline */
+    box-shadow: none; /* Remove box-shadow */
+}
+
+
+  /* Input container */
+.input-container {
+    display: flex;
+    justify-content: center; /* Center horizontally */
+    align-items: center;
+    padding-left: 220px;
+    margin-top: 10px;
+    border-color: rgba(255, 255, 255, 0);
+    
+  }
+  
+  .padding-container{
+    margin-top: 20px;
+    margin-bottom: 30px;
+  }
+  /* Input icon style */
+  .input-icon {
+    margin-right: 10px;
+    color: #ffffff;
+    font-size: 20px;
+  }
+  
+  /* Form input style */
+  .field {
+    width: 200px;
+    padding: 12px;
+    background-color: #ffffff;
+    border-radius: 8px;
+    border: none;
+    outline: none;
+    box-shadow: none;
+    gap: 15px;
+    border-color: rgba(255, 255, 255, 0);
+    font-size: 16px;
+    color: #292C33;
+  }
+  
+  .field:focus {
+    background-color: #ffffff;
+    /* box-shadow: 0 0 10px rgba(68, 129, 235, 0.4); */
+  }
+  
+  
+  /* Error message style */
+  .error-message {
+    color: red;
+    font-size: 14px;
+    margin: 10px 0;
+  }
+  
+  /* Submit button style */
+  .submit-button {
+    background: #4dc020;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    padding: 12px 20px;
+    cursor: pointer;
+    font-size: 18px;
+    transition: background 0.3s;
+  }
+  
+  .submit-button:hover {
+    background: #E64A19;
+  }

@@ -1,0 +1,8 @@
+Flask==2.1.1
+Flask-Cors==3.2.1
+db_manager==1.0.0
+passlib==1.7.4
+uuid==1.30
+json==2.0.9
+pymongo==4.0.1
+certifi==2021.5.30

@@ -43,7 +43,11 @@ class User:
         data = dict(request.json)
 
         # user object containing information needed
-        user = {
-            "email": data["email"],
-            "password": data["password"]
-        }
+        user = db.users.find_one({
+            "email": data["email"]
+        })
+
+        if user and pbkdf2_sha256.verify(data["password"], user["password"]):
+            return self.start_session(user)
+        
+        return jsonify({"error": "Invalid login credentials"}), 400

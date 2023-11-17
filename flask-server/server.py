@@ -66,7 +66,7 @@ def login():
     # TODO: add error handling
     # TODO: add response indicating whether credentials are correct or not, and respective pages to visit
 
-    return {"response": "Incorrect credentials"}
+    return User().login(db)
 
 # for logout
 @app.route("/api/user/logout/", methods=["POST"])

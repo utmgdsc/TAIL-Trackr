@@ -13,11 +13,14 @@ class App extends Component {
     return (
       <div className="App">
         <BrowserRouter>
-          <Routes>
-            <Route path="/" element={<Home />}/>
-            <Route path="/login" element={<Login />}/>
-            <Route path="/register" element={<Register/>}/>
-          </Routes>
+       <NavBar />
+        <main style={{ marginTop: '60px' }}> {/* Adjust the margin value based on your header's height */}
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/login" element={<Login />} />
+              <Route path="/register" element={<Register />} />
+            </Routes>
+        </main>
         </BrowserRouter>
       </div>
     );

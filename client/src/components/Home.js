@@ -1,6 +1,7 @@
 import { Component } from "react";
 import MainPage from "./MainPage"
 import Features from "./Features"
+import "./Home.css"
 
 export default class Home extends Component {
 

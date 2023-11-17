@@ -46,6 +46,7 @@ export default function Register() {
         setIsOk(true)
         setIsLoading(false)
     }
+
     return response
   }
 

@@ -49,9 +49,14 @@ export default function Register() {
             />
           </div>
           </div>
-
-          {error && <div className="error-message">Sorry, email is already in use.</div>}
         </form>
+        {error && (
+                    <div className="error-message">
+                        {error.includes("Invalid email format") && "Invalid email format"}
+                        {error.includes("Password must be at least 8 characters long") && "Password must be at least 8 characters long"}
+                        {error.includes("Email is already in use") && "Email is already in use"}
+                    </div>
+                )}
 
         <button onClick={handleSubmit} className="submit-button">
           Register

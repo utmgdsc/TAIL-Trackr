@@ -22,12 +22,13 @@ export default function useRegister() {
         // logging the response data
         console.log(response)
         
+        
         const json = await response.json()
         
         // checking response
         if (!response.ok) {
             setIsLoading(false)
-            setError(json.error)
+            setError(json.Error)
         }
         if (response.ok) {
             // save user to local storage

@@ -8,8 +8,8 @@ import "./App.css";
 
 
 // app component will control all routes within our program
-class App extends Component {
-  render() {
+function App() {
+
     return (
       <div className="App">
         <BrowserRouter>
@@ -23,8 +23,6 @@ class App extends Component {
         </main>
         </BrowserRouter>
       </div>
-    );
-  }
+    )
 }
-
 export default App;

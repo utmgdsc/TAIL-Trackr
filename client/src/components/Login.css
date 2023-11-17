@@ -1,5 +1,5 @@
-/* Register container with a gradient background */
-.register-container {
+/* Login container with a gradient background */
+.login-container {
     background: linear-gradient(135deg, #292C33, #28a721);
     display: flex;
     justify-content: center;
@@ -10,7 +10,7 @@
   }
   
   /* Content container */
-  .register-content {
+  .login-content {
     background: rgba(255, 255, 255, 0.1);
     padding: 20px;
     border-radius: 8px;

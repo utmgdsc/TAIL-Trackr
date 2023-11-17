@@ -37,7 +37,7 @@ export default function Register() {
     // checking response
     if (!response.ok) {
         setIsLoading(false)
-        setError(json.error)
+        setError(json.Error)
     }
     if (response.ok) {
         // save user to local storage
@@ -86,7 +86,13 @@ export default function Register() {
             />
           </div>
           </div>
-          {error && <div className="error-message">Sorry, email is already in use.</div>}
+          {error && (
+              <div className="error-message">
+                  {error.includes("Invalid email format") && "Invalid email format"}
+                  {error.includes("Password must be at least 8 characters long") && "Password must be at least 8 characters long"}
+                  {error.includes("Email is already in use") && "Email is already in use"}
+              </div>
+          )}
           {isLoading ? <div>Wait a moment please...</div> : ((isOk && !error) ? navigate("/") : null)}
         </form>
 

@@ -13,13 +13,15 @@ app.secret_key =  os.getenv("secret_key") # add into .env
 CORS(app)
 
 from user import User
+from animal import Animal
 
 # obtaining the active MongoClient
 client = db_manager()
 
 # obtaining collections/database
 db = client['Tail-TrackR']
-collection = db['User']
+# for the animal postings
+collection = db['postings']
 
 
 # login authentication decorator (huge shoutout to youtube lol)
@@ -36,11 +38,16 @@ def login_required(f):
 # home route
 @app.route("/", methods=["GET"])
 def home():
-
     return {"response": "Route is connected"}
 
-# for image upload
 
+# updates page (recently lost animals)
+@app.route("/api/get/", methods=["GET"])
+# @login_required
+def get_all_posts():
+    return Animal().getAll(db)
+
+# for image upload
 @app.route("/api/upload/", methods=["POST"])
 @login_required
 def upload_image():
@@ -62,18 +69,12 @@ def register():
 # for login
 @app.route("/api/user/login/", methods=["POST"])
 def login():
-    # TODO: add password decoding and compare to original password, using salt
-    # TODO: add error handling
-    # TODO: add response indicating whether credentials are correct or not, and respective pages to visit
 
     return User().login(db)
 
 # for logout
 @app.route("/api/user/logout/", methods=["POST"])
 def logout():
-    # TODO: add password decoding and compare to original password, using salt
-    # TODO: add error handling
-    # TODO: add response indicating whether credentials are correct or not, and respective pages to visit
 
     return User().logout()
     

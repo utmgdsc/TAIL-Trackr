@@ -1,0 +1,77 @@
+{
+    "brown": [
+      "Airedale",
+      "Borzoi",
+      "Bloodhound",
+      "Boxer",
+      "Bulldog",
+      "Chesapeake Bay Retriever",
+      "Chihuahua",
+      "Dalmation",
+      "Dhole",
+      "Elk Hound",
+      "German Shepherd",
+      "Irish Spaniel",
+      "Irish Wolfhound",
+      "Newfoundland",
+      "Pomeranian",
+      "Pug",
+      "Rhodesian",
+      "Rottweiler",
+      "Boston Terrier",
+      "Chow",
+      "Corgi",
+      "Dingo",
+      "Malinois",
+      "Shiba Inu"
+    ],
+    "white": [
+      "Afghan",
+      "American Hairless",
+      "Bichon Frise",
+      "Cockapoo",
+      "Great Pyrenees",
+      "Maltese",
+      "Mexican Hairless",
+      "Pekinese",
+      "Poodle",
+      "Samoyed",
+      "Saint Bernard",
+      "Scotch Terrier",
+      "Shih-Tzu",
+      "Vizsla",
+      "Yorkie"
+    ],
+    "black": [
+      "Afghan",
+      "Bull Terrier",
+      "Cairn",
+      "Chinese Crested",
+      "Doberman",
+      "French Bulldog",
+      "German Shepherd",
+      "Great Dane",
+      "Groenendael",
+      "Japanese Spaniel",
+      "Labradoodle",
+      "Labrador",
+      "Pit Bull",
+      "Schnauzer",
+      "Shar-Pei",
+      "Siberian Husky",
+      "Poodle"
+    ],
+    "golden": [
+      "Golden Retriever"
+    ],
+    "gray": [
+      "Bearded Collie",
+      "Bluetick",
+      "Border Collie",
+      "Collie",
+      "Greyhound",
+      "Komondor",
+      "Weimaraner"
+    ]
+  }
+  

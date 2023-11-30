@@ -1,4 +1,4 @@
-from flask import Flask, request, session, redirect
+from flask import Flask, request, session, redirect, jsonify
 from flask_cors import CORS
 from functools import wraps
 from db_manager import db_manager
@@ -45,17 +45,15 @@ def home():
 @app.route("/api/get/", methods=["GET"])
 # @login_required
 def get_all_posts():
-    return Animal().getAll(db)
+    post_list = Animal().getAll(db)
+    return jsonify({"Received Information": post_list[0]}), 200
 
 # for image upload
 @app.route("/api/upload/", methods=["POST"])
 @login_required
 def upload_image():
-
-    # this line contains the image bytecode, will be sent to google cloud later
-    image_data = request.get_data()
-
-    return {"response": "Data Received"}
+    
+    return Animal().postNew(db)
 
 # for registration
 @app.route("/api/user/register/", methods=["POST"])

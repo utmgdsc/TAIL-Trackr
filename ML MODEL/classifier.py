@@ -46,7 +46,7 @@ from tensorflow.keras.applications.xception import Xception
 ### ---------------------------------- ###
 
 vgg19 = models.vgg19(pretrained=False)
-vgg19.classifier[6] = nn.Linear(4096, 2)
+vgg19.classifier[6] = nn.Linear(4096, 90)
 
 model_state_path = 'model.pth'
 state_dict = torch.load(model_state_path, map_location=torch.device('cpu'))

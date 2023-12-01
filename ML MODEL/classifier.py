@@ -73,7 +73,7 @@ with torch.no_grad():
     predicted_class = torch.argmax(probabilities).item()
     
     
-if predicted_class == 0:
+if predicted_class == 18:
     ## call the dog model
     model = tf.keras.models.load_model('dogmodel.h5')
 
@@ -123,7 +123,7 @@ if predicted_class == 0:
     print(val,prob)
     
     
-elif predicted_class == 1:
+elif predicted_class == 9:
     model = tf.keras.models.load_model('TAIL-Trackr/ML MODEL/catmodel.h5')
 
     TRAIN_DIR = 'TAIL-Trackr/ML MODEL/cat-data/train'

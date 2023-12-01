@@ -45,18 +45,20 @@ from tensorflow.keras.applications.xception import Xception
 
 ### ---------------------------------- ###
 
+
+
 vgg19 = models.vgg19(pretrained=False)
 vgg19.classifier[6] = nn.Linear(4096, 90)
 
-model_state_path = 'model.pth'
+model_state_path = 'TAIL-Trackr/ML MODEL/model.pth'
 state_dict = torch.load(model_state_path, map_location=torch.device('cpu'))
 
 vgg19.load_state_dict(state_dict)
 
 vgg19.eval()
 
-def preprocess_image(image_url):
-    response = requests.get(image_url)
+def preprocess_image(image_url1):
+    response = requests.get(image_url1)
     img = Image.open(BytesIO(response.content)).convert('RGB')
     preprocess = transforms.Compose([
         transforms.Resize(256),
@@ -67,19 +69,23 @@ def preprocess_image(image_url):
     img = preprocess(img)
     return img.unsqueeze(0)
 
+
+image_url = 'https://cats.com/wp-content/uploads/2020/10/Bengal-cat-like-a-leopard-sneaks.jpg'
+
 with torch.no_grad():
-    outputs = vgg19(preprocess_image("https://www.barrie.ca/sites/default/files/styles/16_9/public/2023-05/Bird-Friendly-City.jpg?itok=g7kLFo8Q"))
+    outputs = vgg19(preprocess_image(image_url))
     probabilities = torch.nn.functional.softmax(outputs[0], dim=0)
     predicted_class = torch.argmax(probabilities).item()
     
     
+    
 if predicted_class == 18:
     ## call the dog model
-    model = tf.keras.models.load_model('dogmodel.h5')
+    model = tf.keras.models.load_model('TAIL-Trackr/ML MODEL/dogmodel.h5')
 
-    TRAIN_DIR = 'dog data/train'
-    VAL_DIR = 'dog data/valid'
-    TEST_DIR = 'dog data/test'
+    TRAIN_DIR = 'TAIL-Trackr/ML MODEL/dog_data/train'
+    VAL_DIR = 'TAIL-Trackr/ML MODEL/dog_data/valid'
+    TEST_DIR = 'TAIL-Trackr/ML MODEL/dog_data/test'
 
     DIMS = (224,224)
     IMG_SIZE = 224
@@ -99,6 +105,10 @@ if predicted_class == 18:
 
 
     label_mapper = np.asarray(list(train_data.class_indices.keys()))
+    
+    
+    response = requests.get(image_url)
+    img = load_img(BytesIO(response.content), target_size=DIMS)
 
 
     def predictor(img):
@@ -110,13 +120,6 @@ if predicted_class == 18:
         print(res.shape)
         idx = res.argmax()
         return label_mapper[idx], res[0][idx]
-
-
-
-
-    url = 'https://www.akc.org/wp-content/uploads/2017/11/Siberian-Husky-standing-outdoors-in-the-winter.jpg'
-    response = requests.get(url)
-    img = load_img(BytesIO(response.content), target_size=DIMS)
 
     val,prob = predictor(img)
 
@@ -126,9 +129,9 @@ if predicted_class == 18:
 elif predicted_class == 9:
     model = tf.keras.models.load_model('TAIL-Trackr/ML MODEL/catmodel.h5')
 
-    TRAIN_DIR = 'TAIL-Trackr/ML MODEL/cat-data/train'
-    VAL_DIR = 'TAIL-Trackr/ML MODEL/cat-data/val'
-    TEST_DIR = 'TAIL-Trackr/ML MODEL/cat-data/test'
+    TRAIN_DIR1 = 'TAIL-Trackr/ML MODEL/cat-data/train'
+    VAL_DIR1 = 'TAIL-Trackr/ML MODEL/cat-data/val'
+    TEST_DIR1 = 'TAIL-Trackr/ML MODEL/cat-data/test'
 
     DIMS = (224,224)
     IMG_SIZE = 224
@@ -137,20 +140,20 @@ elif predicted_class == 9:
 
     data_gen = ImageDataGenerator(rescale=1/255)
 
-    train_data = data_gen.flow_from_directory(batch_size=BATCH_SIZE, directory=TRAIN_DIR, shuffle=True,
+    train_data = data_gen.flow_from_directory(batch_size=BATCH_SIZE, directory=TRAIN_DIR1, shuffle=True,
                                                 target_size=DIMS, class_mode='categorical')
 
-    val_data = data_gen.flow_from_directory(batch_size=BATCH_SIZE, directory=VAL_DIR, shuffle=True,
+    val_data = data_gen.flow_from_directory(batch_size=BATCH_SIZE, directory=VAL_DIR1, shuffle=True,
                                                 target_size=DIMS, class_mode='categorical')
 
-    test_data = data_gen.flow_from_directory(batch_size=BATCH_SIZE, directory=TEST_DIR, shuffle=True,
+    test_data = data_gen.flow_from_directory(batch_size=BATCH_SIZE, directory=TEST_DIR1, shuffle=True,
                                                 target_size=DIMS, class_mode='categorical')
 
 
-    label_mapper = np.asarray(list(train_data.class_indices.keys()))
+    label_mapper1 = np.asarray(list(train_data.class_indices.keys()))
 
 
-    def predictor(img):
+    def predictor1(img):
         #display(img)
         arr = img_to_array(img)
         arr = arr/255.0
@@ -158,20 +161,23 @@ elif predicted_class == 9:
         res = model.predict(arr)
         print(res.shape)
         idx = res.argmax()
-        return label_mapper[idx], res[0][idx]
+        return label_mapper1[idx], res[0][idx]
 
-    url = 'https://www.hepper.com/wp-content/uploads/2021/10/Egyptian-Mau-Kitten_Shutterstock_Anastasiia-Chystokoliana.jpg'
-    response = requests.get(url)
+    response = requests.get(image_url)
     img = load_img(BytesIO(response.content), target_size=DIMS)
 
-    val,prob = predictor(img)
+    val,prob = predictor1(img)
 
     print(val,prob)
 
 else:
     print("please input a cat or a dog")
+    
+    
+
+
+
 
 # Perform further operations based on the predicted class or probabilities
 # For example, print the predicted class index and its probability
-print(f"Predicted Class Index: {'dog' if predicted_class else 'cat'}")
 print(f"Probability: {probabilities[predicted_class].item()}")

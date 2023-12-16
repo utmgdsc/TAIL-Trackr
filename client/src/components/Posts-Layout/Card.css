@@ -1,0 +1,39 @@
+/* Cards.css */
+
+.Card {
+    border: 1px solid #ddd;
+    padding: 15px;
+    margin: 15px;
+    width: 300px;
+    border-radius: 8px;
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: box-shadow 0.3s ease-in-out;
+  }
+  
+  .Card:hover {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  }
+  
+  .Card h3 {
+    font-size: 18px;
+    margin-bottom: 10px;
+  }
+  
+  .Card p {
+    margin: 8px 0;
+  }
+  
+  .Card button {
+    padding: 8px;
+    background-color: #0e380f;
+    color: white;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out;
+  }
+  
+  .Card button:hover {
+    background-color: #1d4f20;
+  }
+  

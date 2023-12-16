@@ -14,6 +14,9 @@ function NavBar() {
           <Link to="/">Home</Link>
         </li>
         <li>
+          <Link to="/new-post">New Posts</Link>
+        </li>
+        <li>
           <a href='#'>About</a>
         </li>
         <li>

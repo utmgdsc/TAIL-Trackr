@@ -20,7 +20,7 @@ class Animal:
 
         new_post = {
             "_id": uuid.uuid4().hex,
-            "uploader": session["user"]["email"],
+            "uploader": data["data"]["userEmail"],
             "image": data["data"]["image"],
             "latitude": data["data"]["location"]["latitude"],
             "longitude": data["data"]["location"]["longitude"],

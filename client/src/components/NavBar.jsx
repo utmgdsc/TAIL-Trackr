@@ -17,7 +17,7 @@ function NavBar() {
           <Link to="/new-post">New Posts</Link>
         </li>
         <li>
-          <a href='#'>About</a>
+          <Link to='/dashboard'>Dashboard</Link>
         </li>
         <li>
           <Link to="/register">Register</Link>

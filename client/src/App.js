@@ -8,7 +8,6 @@ import "./App.css";
 import NewPostPage from "./components/NewPostPage";
 import CreatePost from "./components/CreatePost";
 
-
 // app component will control all routes within our program
 function App() {
 

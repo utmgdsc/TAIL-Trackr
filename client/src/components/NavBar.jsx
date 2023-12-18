@@ -14,7 +14,7 @@ function NavBar() {
           <Link to="/">Home</Link>
         </li>
         <li>
-          <Link to="/new-post">New Posts</Link>
+          <Link to="/create-post">Create Posts</Link>
         </li>
         <li>
           <Link to='/dashboard'>Dashboard</Link>

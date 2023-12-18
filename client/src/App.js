@@ -7,6 +7,7 @@ import Register from "./components/Register"
 import "./App.css";
 import NewPostPage from "./components/NewPostPage";
 import CreatePost from "./components/CreatePost";
+import Dashboard from "./components/Dashboard";
 
 // app component will control all routes within our program
 function App() {
@@ -22,7 +23,7 @@ function App() {
               <Route path="/register" element={<Register />} />
               <Route path="/new-post" element={<NewPostPage />} />
               {localStorage.getItem("user") ? <Route path="/create-post" element={<CreatePost />} /> : redirect("/")}
-              {/* <Route path="/dashboard" element={<VisiblePosts />} /> */}
+              <Route path="/dashboard" element={<Dashboard />} />
             </Routes>
         </main>
         </BrowserRouter>

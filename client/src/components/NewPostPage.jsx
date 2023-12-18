@@ -1,7 +1,7 @@
 import { Component } from "react";
 import "./NewPostPage.css"
-import Card from "./Posts-Layout/Card";
-import FilterSidebar from "./Posts-Layout/Filtersidebar";
+// import Card from "./Posts-Layout/Card";
+// import FilterSidebar from "./Posts-Layout/Filtersidebar";
 
 export default class NewPostPage extends Component {
 
@@ -124,7 +124,7 @@ export default class NewPostPage extends Component {
                   this.setState({ selectedImage: event.target.files[0] });
                 }}
               />
-            <FilterSidebar
+            {/* <FilterSidebar
               data={{
                 "uploader_name":"inaam",
                 "name":"doggo",
@@ -140,7 +140,7 @@ export default class NewPostPage extends Component {
               {this.state.data.map((item) => (
                   <Card key={item.id} data={item} />
               ))}
-              </div>
+              </div> */}
             </div>
             
           );

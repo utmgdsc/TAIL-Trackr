@@ -1,5 +1,5 @@
-from flask import Flask, request, session, redirect
-from flask_cors import CORS
+from flask import Flask, request, session, redirect, jsonify
+from flask_cors import CORS, cross_origin
 from functools import wraps
 from db_manager import db_manager
 import os
@@ -7,19 +7,21 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-# added cors in case we change route in the future
 app = Flask(__name__)
-app.secret_key =  os.getenv("secret_key") # add into .env
+app.config.from_object(__name__)
+app.secret_key = str(os.getenv("secret_key"))
 CORS(app)
 
 from user import User
+from animal import Animal
 
 # obtaining the active MongoClient
 client = db_manager()
 
 # obtaining collections/database
 db = client['Tail-TrackR']
-collection = db['User']
+# for the animal postings
+collection = db['postings']
 
 
 # login authentication decorator (huge shoutout to youtube lol)
@@ -27,6 +29,7 @@ collection = db['User']
 def login_required(f):
     @wraps(f)
     def wrap(*args, **kwargs):
+        print(session)
         if "logged_in" in session:
             return f(*args, **kwargs)
         else:
@@ -36,19 +39,22 @@ def login_required(f):
 # home route
 @app.route("/", methods=["GET"])
 def home():
-
     return {"response": "Route is connected"}
 
-# for image upload
 
-@app.route("/api/upload/", methods=["POST"])
+# updates page (recently lost animals)
+@app.route("/api/get/", methods=["GET"])
 @login_required
-def upload_image():
+def get_all_posts():
+    post_list = Animal().getAll(db)
+    return jsonify({"Received Information": post_list[0]}), 200
 
-    # this line contains the image bytecode, will be sent to google cloud later
-    image_data = request.get_data()
-
-    return {"response": "Data Received"}
+# for image upload
+@app.route("/api/upload/", methods=["POST"])
+# @login_required
+def upload_post():
+    print('reached here')
+    return Animal().postNew(db)
 
 # for registration
 @app.route("/api/user/register/", methods=["POST"])
@@ -62,20 +68,14 @@ def register():
 # for login
 @app.route("/api/user/login/", methods=["POST"])
 def login():
-    # TODO: add password decoding and compare to original password, using salt
-    # TODO: add error handling
-    # TODO: add response indicating whether credentials are correct or not, and respective pages to visit
 
     return User().login(db)
 
-# for logout
-@app.route("/api/user/logout/", methods=["POST"])
-def logout():
-    # TODO: add password decoding and compare to original password, using salt
-    # TODO: add error handling
-    # TODO: add response indicating whether credentials are correct or not, and respective pages to visit
+# # for logout
+# @app.route("/api/user/logout/", methods=["POST"])
+# def logout():
 
-    return User().logout()
+#     return User().logout()
     
 # running the app
 if __name__ == "__main__":

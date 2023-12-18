@@ -36,7 +36,7 @@
     background-color: #0056b3;
   }
   
-  input[type="file"] {
+  input{
     display: none;
   }
   

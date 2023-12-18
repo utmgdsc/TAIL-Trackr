@@ -1,0 +1,99 @@
+/* NewPostPage.css */
+
+.App-Main {
+    text-align: center;
+    font-family: Arial, sans-serif;
+    padding: 20px;
+  }
+  
+  h1 {
+    font-size: 24px;
+    margin-top: 20px;
+    color: #ffffff;
+  }
+  
+  img {
+    max-width: 100%;
+    border: 2px solid #333;
+    border-radius: 5px;
+    margin-top: 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  button {
+    background-color: #007BFF;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    margin-top: 20px;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+  }
+  
+  input {
+    display: inline-block;
+  }
+
+  
+  /* Styles for the FilterSidebar */
+.FilterSidebar {
+  padding: 10px;
+  margin: 20px;
+}
+.FilterSidebar label{
+  margin: 10px;
+  background-color: rgb(32, 15, 141);
+}
+.FilterSidebar input {
+  margin: 10px;
+}
+.FilterSidebar button {
+  margin: 10px;
+  padding: 8px;
+  background-color: rgb(32, 15, 141);
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+
+/* Styles for the Card */
+.Card-Layout {
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  margin-left: 35%;
+}
+
+.Card {
+  border: 1px solid #ddd;
+  padding: 10px;
+  margin: 10px;
+  width: 300px;
+  text-align: center;
+  align-items: center;
+  
+}
+
+.Card h3 {
+  font-size: 16px;
+  margin-bottom: 10px;
+}
+
+.Card p {
+  margin: 5px 0;
+}
+
+.Card button {
+  padding: 8px;
+  background-color: #213e22;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+.Card button:hover {
+  background-color: #245627;
+}

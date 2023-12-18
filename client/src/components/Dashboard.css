@@ -1,0 +1,41 @@
+.Card-Layout{
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); /* Adjust the minmax values as needed */
+    justify-content: center; /* Center the grid horizontally */
+    align-items: center; /* Center the grid vertically */
+    gap: 2rem; /* Adjust the gap between cards */
+  
+    /* Additional styling if needed */
+    margin: 0 auto; /* Center the entire grid on the page */
+    max-width: 1200px; /* Set a max width to limit the width of the grid */
+    z-index: 1; /* Adjust the value based on your layout */
+    position: relative; /* or absolute, fixed, etc. */
+
+  }
+
+  .Card{
+    /* margin-right: 2rem; */
+    translate: 0.2s;
+  }
+
+  .App-dropdowns{
+    display: flex;
+    justify-content: space-between;
+    margin: 1;
+    transition: 0.2s;
+    z-index: 2; /* Adjust the value based on your layout */
+    position: relative; /* or absolute, fixed, etc. */
+    margin-bottom: 10px; /* Adjust the margin based on your layout */
+  }
+  .App-dropdowns{
+    display: flex;
+    justify-content: space-between;
+    margin: 1;
+    /* padding-bottom: 10%; */
+  }
+
+  .spacing{
+    margin-bottom: 6%;
+    padding:10px;
+    transition: 0.5s;
+  }

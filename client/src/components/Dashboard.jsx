@@ -2,6 +2,7 @@ import { useState } from "react";
 import "./Dashboard.css"
 import Card from "./Posts-Layout/Card";
 import Dropdown from "./Posts-Layout/Dropdown";
+import Maps from "./Posts-Layout/Maps";
 
 export default function Dashboard() {
 
@@ -129,6 +130,9 @@ export default function Dashboard() {
             {filteredData.map((item) => (
                 <Card className="Card" key={item.id} data={item} />
             ))}
+            </div>
+            <div className="Map-Layout">
+              <Maps />
             </div>
         </div>
     );

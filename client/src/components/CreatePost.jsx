@@ -10,6 +10,8 @@ function CreatePost() {
   const [selectedAnimalStatus, setSelectedAnimalStatus] = useState(null);
   const [userPhone, setUserPhone] = useState("");
   const [description, setDescription] = useState("");
+  const baseURL = "http://127.0.0.1:5000"
+
   console.log(localStorage.getItem("user"))
   const handleSubmit = async () => {
     setError(null)
@@ -22,22 +24,24 @@ function CreatePost() {
             return
         }
 
+        console.log(JSON.parse(localStorage.getItem("user")))
+
         // combining form data
         const data = {
             image: imageByteCode,
+            userEmail: JSON.parse(localStorage.getItem("user")).email,
             location: {latitude: latitude, longitude: longitude},
             animalStatus: selectedAnimalStatus,
             userDescription: description,
             phone: userPhone
         }
-        console.log(imageByteCode)
 
         // uploading all data
-        const response = await fetch("/api/upload/", {
+        const response = await fetch(baseURL + "/api/upload/", {
             method: "POST",
-            credentials: "include",
+            // credentials: "include",
             headers: {
-                "Content-Type": "application/text",
+                "Content-Type": "application/json",
             },
             body: JSON.stringify({ data })
         });

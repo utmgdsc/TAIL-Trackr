@@ -7,8 +7,6 @@ import Register from "./components/Register"
 import "./App.css";
 import NewPostPage from "./components/NewPostPage";
 import CreatePost from "./components/CreatePost";
-import Dashboard from "./components/Dashboard";
-
 
 // app component will control all routes within our program
 function App() {

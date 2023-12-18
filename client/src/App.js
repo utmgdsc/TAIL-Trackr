@@ -25,7 +25,6 @@ function App() {
               <Route path="/new-post" element={<NewPostPage />} />
               {localStorage.getItem("user") ? <Route path="/create-post" element={<CreatePost />} /> : redirect("/")}
               {/* <Route path="/dashboard" element={<VisiblePosts />} /> */}
-              <Route path="/dashboard" element={<Dashboard />} />
             </Routes>
         </main>
         </BrowserRouter>

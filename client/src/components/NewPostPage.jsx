@@ -1,5 +1,7 @@
 import { Component } from "react";
 import "./NewPostPage.css"
+import Card from "./Posts-Layout/Card";
+import FilterSidebar from "./Posts-Layout/Filtersidebar";
 
 export default class NewPostPage extends Component {
 
@@ -30,8 +32,8 @@ export default class NewPostPage extends Component {
       filteredData: [],
     };
   }
-    
-      handleSubmit = async () => {
+    // submitting the post with image and details entered by the user
+    handleSubmit = async () => {
         let imageByteCode = "";
     
         this.getBase64(this.state.selectedImage, (result) => {
@@ -50,6 +52,7 @@ export default class NewPostPage extends Component {
         console.log(json);
       };
     
+      // converting the image into bytes so that it can be processed by the model
       getBase64(file, callback) {
         const reader = new FileReader();
         reader.readAsDataURL(file);
@@ -97,10 +100,11 @@ export default class NewPostPage extends Component {
 
 
     render() {
+
         return (
             <div className="App-Main">
               <h1>Upload Image of Animal Here</h1>
-      
+
               {this.state.selectedImage && (
                 <div>
                   <img
@@ -120,12 +124,29 @@ export default class NewPostPage extends Component {
                   this.setState({ selectedImage: event.target.files[0] });
                 }}
               />
+            <FilterSidebar
+              data={{
+                "uploader_name":"inaam",
+                "name":"doggo",
+                "animal": "cat",
+                "breed":"rat",
+                "specification":"cat rat",
+                "match_rating": 0.5,
+                "star": 1
+            }}
+              setFilteredData={[]}
+            />
+              <div className="Card-Layout">
+              {this.state.data.map((item) => (
+                  <Card key={item.id} data={item} />
+              ))}
+              </div>
             </div>
             
           );
 
 
-
+          
             {/* 
             add remaining details here (animal type checkbox, uploader info, etc.): 
             */}

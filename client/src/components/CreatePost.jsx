@@ -24,8 +24,6 @@ function CreatePost() {
             return
         }
 
-        console.log(JSON.parse(localStorage.getItem("user")))
-
         // combining form data
         const data = {
             image: imageByteCode,

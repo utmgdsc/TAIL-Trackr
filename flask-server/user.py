@@ -34,7 +34,8 @@ class User:
         user = {
             "_id": uuid.uuid4().hex,
             "email": data["email"],
-            "password": data["password"]
+            "password": data["password"],
+            "verified": False
         }
         
         # encrypting password

@@ -1,6 +1,5 @@
 import { Component } from "react";
 import "./NewPostPage.css"
-import Card from "./Posts-Layout/Card";
 export default class NewPostPage extends Component {
 
   constructor() {
@@ -122,19 +121,8 @@ export default class NewPostPage extends Component {
                   this.setState({ selectedImage: event.target.files[0] });
                 }}
               />
-              <div className="Card-Layout">
-              {this.state.data.map((item) => (
-                  <Card key={item.id} data={item} />
-              ))}
-              </div>
             </div>
             
           );
-
-
-          
-            {/* 
-            add remaining details here (animal type checkbox, uploader info, etc.): 
-            */}
     }
 }

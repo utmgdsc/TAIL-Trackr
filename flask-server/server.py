@@ -1,9 +1,10 @@
-from flask import Flask, request, session, redirect, jsonify
+from flask import Flask, request, session, redirect, jsonify, url_for
 from flask_cors import CORS, cross_origin
 from functools import wraps
 from db_manager import db_manager
 import os
 from dotenv import load_dotenv
+from flask_mail import Mail, Message
 
 load_dotenv()
 
@@ -11,6 +12,15 @@ app = Flask(__name__)
 app.config.from_object(__name__)
 app.secret_key = str(os.getenv("secret_key"))
 CORS(app)
+
+app.config["MAIL_SERVER"] = "smtp.office365.com"
+app.config["MAIL_PORT"] = 587
+app.config["MAIL_USERNAME"] = "voraadev@outlook.com"
+app.config["MAIL_PASSWORD"] = str(os.getenv("email_pass"))
+app.config["MAIL_USE_TLS"] = True
+app.config["MAIL_USE_SSL"] = False
+
+mail = Mail(app)
 
 from user import User
 from animal import Animal
@@ -62,7 +72,21 @@ def register():
     print("registering")
     output = User().register(db)
     print("registered")
-    print(session)
+
+    if output[1] >= 400:
+        return output
+
+    # sending verification email
+    msg = Message("Verify your email address", sender="voraadev@outlook.com", recipients=[session["user"]["email"]])
+
+    # user email verification
+    baseURL = "http://localhost:3000"
+    userID = session["user"]["_id"]
+
+    link = baseURL + "/confirm_email?id=" + userID
+    msg.body = f"Please verify your email by clicking the following link: {link}"
+    mail.send(msg)
+    
     return output
 
 # for login
@@ -72,11 +96,10 @@ def login():
     return User().login(db)
 
 # # for logout
-# @app.route("/api/user/logout/", methods=["POST"])
-# def logout():
+@app.route("/api/user/logout/", methods=["POST"])
+def logout():
+    return User().logout()
 
-#     return User().logout()
-    
 # running the app
 if __name__ == "__main__":
     app.run(debug=True, port=5000)

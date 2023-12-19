@@ -98,9 +98,9 @@ export default function Dashboard() {
                 <Card className="Card" key={item.id} data={item} />
             ))}
             </div>
-            {/* <div className="Map-Layout">
+            <div className="Map-Layout">
               <Maps />
-            </div> */}
+            </div>
         </div>
     );
             

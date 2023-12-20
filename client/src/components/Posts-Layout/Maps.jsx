@@ -2,11 +2,8 @@ import React from 'react';
 import { GoogleMap, useLoadScript, Marker } from '@react-google-maps/api';
 
 const libraries = ['places'];
-<<<<<<< HEAD
-const API = process.env.API_KEY;
-=======
-const API = "AIzaSyCd5DZyTEYIe0a21Uc_LDHGi7j2DjvdU5c";
->>>>>>> 5ac5ca07b208eb635fda4579da93eaa0f283a4f7
+const API = process.env.REACT_APP_API_KEY; 
+// const API = "AIzaSyCd5DZyTEYIe0a21Uc_LDHGi7j2DjvdU5c";
 const mapContainerStyle = {
   width: '80vw',
   height: '100vh',
@@ -37,7 +34,7 @@ const Maps = () => {
 
   return (
     <div>
-      <GoogleMap
+      <GoogleMap 
         mapContainerStyle={mapContainerStyle}
         zoom={10}
         center={center}
@@ -48,6 +45,7 @@ const Maps = () => {
         <Marker position={center} />
 
       </GoogleMap>
+      <button onClick={e=>(console.log(process.env))}>Click me</button>
     </div>
   );
 };

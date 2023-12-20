@@ -21,7 +21,6 @@
   }
   
   button {
-    background-color: #007BFF;
     color: #fff;
     border: none;
     padding: 10px 20px;
@@ -29,7 +28,6 @@
     cursor: pointer;
     margin-top: 20px;
     border-radius: 5px;
-    transition: background-color 0.3s;
   }
   
   input {

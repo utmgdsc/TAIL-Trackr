@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useGeolocated } from "react-geolocated";
-import "./NewPostPage.css";
+import "./CreatePost.css";
 
 function CreatePost() {
   const [selectedImage, setSelectedImage] = useState(null);
@@ -102,87 +102,94 @@ function CreatePost() {
     <div className="App-Main">
     {error && <div>The following error has occured: {error}</div>}
       <h1>Upload Image of Animal Here</h1>
-      <form>
-        {selectedImage && (
-          <div>
-            <img
-              alt="not found"
-              width={"250px"}
-              src={URL.createObjectURL(selectedImage)}
-            />
-            <br />
+      <div>
+        <form>
+          <div className="top-form">
+            <div className="Image-feature">
+              {selectedImage && (
+                <div>
+                  <img
+                    alt="not found"
+                    width={"250px"}
+                    src={URL.createObjectURL(selectedImage)}
+                  />
+                  <br />
+                </div>
+              )}
+              <input
+                type="file"
+                name="myImage"
+                onChange={(event) => {
+                  console.log(event.target.files[0]);
+                  setSelectedImage(event.target.files[0]);
+                }}
+              /> 
+            </div>
+            <div className="Geolocation">
+              {/** finding location (change with google maps API instead) **/}
+              {!isGeolocationAvailable ? (
+                <div>Your browser does not allow location, please enter your location manually:</div>
+              ) : !isGeolocationEnabled ? (
+                <div>Location is not enabled</div>
+              ) : coords ? (
+                <div>Location received</div>
+              ) : (
+                <div>Getting the location data</div>
+              )}
+            </div>
           </div>
-        )}
-        <input
-          type="file"
-          name="myImage"
-          onChange={(event) => {
-            console.log(event.target.files[0]);
-            setSelectedImage(event.target.files[0]);
-          }}
-        />
+          <div className="bottom-form">
+            <div className="animal-status-radio-buttons">
+              <h2>Choose an Option:</h2>
+                <div className="animal-status">
+                    <label>
+                        <input
+                        type="radio"
+                        value="Lost"
+                        checked={selectedAnimalStatus === "Lost"}
+                        onChange={handleAnimalStatusChange}
+                        />
+                        Lost
+                    </label>
+                    <label>
+                        <input
+                        type="radio"
+                        value="Stray"
+                        checked={selectedAnimalStatus === "Stray"}
+                        onChange={handleAnimalStatusChange}
+                        />
+                        Stray
+                    </label>
+                    <label>
+                        <input
+                        type="radio"
+                        value="Don't Know"
+                        checked={selectedAnimalStatus === "Don't Know"}
+                        onChange={handleAnimalStatusChange}
+                        />
+                        Don't Know
+                    </label>
+                  </div>
+            </div>
+            <div className="additional-info">
+              <label>
+                  Enter Additional Information:
+                  <textarea value={description} rows={4} cols={30} onChange={handleDescriptionChange} ></textarea>
+              </label>
 
-        {/** finding location (change with google maps API instead) **/}
-        {!isGeolocationAvailable ? (
-          <div>Your browser does not allow location, please enter your location manually:</div>
-        ) : !isGeolocationEnabled ? (
-          <div>Location is not enabled</div>
-        ) : coords ? (
-          <div>Location received</div>
-        ) : (
-          <div>Getting the location data</div>
-        )}
-
-        <div className="animal-status-radio-buttons">
-        <h2>Choose an Option:</h2>
-            <label>
-                <input
-                type="radio"
-                value="Lost"
-                checked={selectedAnimalStatus === "Lost"}
-                onChange={handleAnimalStatusChange}
-                />
-                Lost
-            </label>
-            <label>
-                <input
-                type="radio"
-                value="Stray"
-                checked={selectedAnimalStatus === "Stray"}
-                onChange={handleAnimalStatusChange}
-                />
-                Stray
-            </label>
-            <label>
-                <input
-                type="radio"
-                value="Don't Know"
-                checked={selectedAnimalStatus === "Don't Know"}
-                onChange={handleAnimalStatusChange}
-                />
-                Don't Know
-            </label>
+              <label>
+                  Enter your phone number/email
+                  <input
+                      type="text"
+                      value={userPhone}
+                      onChange={handlePhoneChange}
+                  />
+              </label>
+            </div>
+          </div>
+          </form>
         </div>
-
-        <label>
-            Enter additional information which would help a user find their animal (i.e. where you found it (if not included already), if it has a collar or not...):
-            <input
-                type="text"
-                value={description}
-                onChange={handleDescriptionChange}
-            />
-        </label>
-
-        <label>
-            Enter your phone number/email
-            <input
-                type="text"
-                value={userPhone}
-                onChange={handlePhoneChange}
-            />
-        </label>
-        </form>
-      <button onClick={handleSubmit}>Submit</button>
+      <button className="btn-sub" onClick={handleSubmit}>Submit</button>
 
     </div>
     

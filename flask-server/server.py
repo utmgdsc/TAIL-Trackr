@@ -66,6 +66,11 @@ def upload_post():
     print('reached here')
     return Animal().postNew(db)
 
+# to ensure that user's email is verified
+@app.route("/api/verify/", methods=["POST"])
+def verifyEmail():
+    return User().verifyEmail(db)
+
 # for registration
 @app.route("/api/user/register/", methods=["POST"])
 def register():

@@ -89,7 +89,7 @@ export default function Login() {
           </div>
 
           {error && <div className="error-message">Sorry, incorrect email or password.</div>}
-          {isLoading ? <div>Wait a moment please...</div> : ((isOk && !error) ? navigate("/") : null)}
+          {isLoading ? <div>Wait a moment please...</div> : ((isOk && !error) ? (() => { window.location.reload(); navigate("/"); })() : null)}
         </form>
 
         <button onClick={handleSubmit} className="submit-button">

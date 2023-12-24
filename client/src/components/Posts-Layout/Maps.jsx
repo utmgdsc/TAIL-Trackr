@@ -7,7 +7,6 @@ const API = process.env.REACT_APP_API_KEY;
 const mapContainerStyle = {
   width: '80vw',
   height: '100vh',
-  
 };
 const center = {
   lat: 43.595310, // default latitude

@@ -26,7 +26,12 @@ class Animal:
             "longitude": data["data"]["location"]["longitude"],
             "animalStatus": data["data"]["animalStatus"],
             "userDescription": data["data"]["userDescription"],
-            "phoneNumber": data["data"]["phone"]
+            "phoneNumber": data["data"]["phone"],
+            "animal": data["data"]["animal"],
+            "breed": data["data"]["breed"],
+            "colour": data["data"]["colour"],
+            "size": data["data"]["size"],
+            "weight": data["data"]["weight"]
         }
         print(new_post)
         # if the data already exists, don't want a duplicate

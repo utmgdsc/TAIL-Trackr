@@ -30,8 +30,8 @@
 
 .animalImage{
   margin-top: 2rem;
-  max-width: 90%;
-  height: auto;
+  max-width: 300px;
+  height: 250px;
   border-radius: 15px;
   
 }
@@ -52,6 +52,7 @@
 }
 .displayStack__0{
   display: flex;
+  
   margin: 0.5rem;
   align-items: center;
   

@@ -1,10 +1,30 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import "./Dashboard.css"
 import Card from "./Posts-Layout/Card";
 import Dropdown from "./Posts-Layout/Dropdown";
 import Maps from "./Posts-Layout/Maps"
 
 export default function Dashboard() {
+  const [currentPage, setCurrentPage] = useState(1);
+  const postsPerPage = 9;
+  const [animalData, setAnimalData] = useState([]);
+
+  useEffect(() => {
+      // Fetch animal data from the server
+      const fetchData = async () => {
+          try {
+              const response = await fetch("http://127.0.0.1:5000/api/get/all");
+              const data = await response.json();
+              setAnimalData(data["Received Information"]);
+          } catch (error) {
+              console.error("Error fetching animal data:", error);
+          }
+      };
+
+      fetchData();
+  }, [animalData]);
+
+  // console.log(animalData)
 
     let state = {
       data: [
@@ -55,6 +75,7 @@ export default function Dashboard() {
           },
       ],
     };
+
     const options = ["All", "Cat", "Dog"]
     const cat_options = ["All", "Abyssinian","Bengal","Birman","Bombay","British_Shorthair","Egyptian_Mau","Maine_Coon","Persian","Ragdoll","Russian_Blue","Siamese","Sphynx"]
     const dog_options = ["All", "Afghan","African Wild Dog","Airedale","American  Spaniel","American Hairless","American Spaniel","Basenji","Basset","Beagle","Bearded Collie","Bermaise","Bichon Frise","Blenheim","Bloodhound","Bluetick","Border Collie","Borzoi","Boston Terrier","Boxer","Bull Mastiff","Bull Terrier","Bulldog","Cairn","Chihuahua","Chinese Crested","Chow","Clumber","Cockapoo","Cocker","Collie","Corgi","Coyote","DOG","Dalmation","Dhole","Dingo","Doberman","Elk Hound","French Bulldog","German Sheperd","Golden Retriever","Great Dane","Great Perenees","Greyhound","Groenendael","Irish Spaniel","Irish Wolfhound","Japanese Spaniel","Komondor","Labradoodle","Labrador","Lhasa","Malinois","Maltese","Mex Hairless","Newfoundland","Pekinese","Pit Bull","Pomeranian","Poodle","Pug","Rhodesian","Rottweiler","Saint Bernard","Schnauzer","Scotch Terrier","Shar_Pei","Shiba Inu","Shih-Tzu","Siberian Husky","Vizsla","Yorkie"]
@@ -70,13 +91,17 @@ export default function Dashboard() {
 
       // Function to filter data based on selected animal and breed
       const filterData = () => {
-        return state.data.filter(item => {
-          const isAnimalMatch = selectedAnimal === 'All' || selectedAnimal === 'Animal' || item.animal === selectedAnimal;
-          const isBreedMatch = selectedBreed === 'All' || selectedBreed === 'Breed' || item.breed === selectedBreed;
+        const startIndex = (currentPage - 1) * postsPerPage;
+        const endIndex = startIndex + postsPerPage;
+        const slicedData = animalData.slice(startIndex, endIndex);
     
-          return isAnimalMatch && isBreedMatch;
+        return slicedData.filter(item => {
+            const isAnimalMatch = selectedAnimal === 'All' || selectedAnimal === 'Animal' || item.animal === selectedAnimal;
+            const isBreedMatch = selectedBreed === 'All' || selectedBreed === 'Breed' || item.breed === selectedBreed;
+    
+            return isAnimalMatch && isBreedMatch;
         });
-      };
+    };
     
       // Get the filtered data
       const filteredData = filterData();
@@ -93,11 +118,16 @@ export default function Dashboard() {
               )
             }
             
-            <div className="Card-Layout">
+              <div className="Card-Layout">
             {filteredData.map((item) => (
                 <Card className="Card" key={item.id} data={item} />
             ))}
             </div>
+            <div id="pagination">
+              <button disabled={currentPage === 1} onClick={() => setCurrentPage(currentPage - 1)}>Previous</button>
+              <span>Page {currentPage}</span>
+              <button disabled={currentPage * postsPerPage >= animalData.length} onClick={() => setCurrentPage(currentPage + 1)}>Next</button>
+          </div>
             <div className="Map-Layout">
               <Maps />
             </div>

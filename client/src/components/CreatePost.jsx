@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useGeolocated } from "react-geolocated";
-import "./NewPostPage.css";
+import "./CreatePost.css";
 
 function CreatePost() {
   const [selectedImage, setSelectedImage] = useState(null);
@@ -24,6 +24,20 @@ function CreatePost() {
             return
         }
 
+        // "_id": uuid.uuid4().hex,
+        // "uploader": data["data"]["userEmail"],
+        // "image": data["data"]["image"],
+        // "latitude": data["data"]["location"]["latitude"],
+        // "longitude": data["data"]["location"]["longitude"],
+        // "animalStatus": data["data"]["animalStatus"],
+        // "userDescription": data["data"]["userDescription"],
+        // "phoneNumber": data["data"]["phone"],
+        // "animal": data["data"]["animal"],
+        // "breed": data["data"]["breed"],
+        // "colour": data["data"]["colour"],
+        // "size": data["data"]["size"],
+        // "weight": data["data"]["weight"]
+
         // combining form data
         const data = {
             image: imageByteCode,
@@ -31,7 +45,13 @@ function CreatePost() {
             location: {latitude: latitude, longitude: longitude},
             animalStatus: selectedAnimalStatus,
             userDescription: description,
-            phone: userPhone
+            phone: userPhone,
+            animal: "Cat",
+            breed: "Persian",
+            colour: "Black",
+            size: "Small",
+            weight: "Light"
+
         }
 
         // uploading all data

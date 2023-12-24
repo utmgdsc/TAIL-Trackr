@@ -28,7 +28,8 @@ function App() {
               <Route path="/login" element={<Login />} />
               <Route path="/register" element={<Register />} />
               <Route path="/new-post" element={<NewPostPage />} />
-              <Route path="/create-post" element={ verified ? ( <CreatePost /> ) : ( user ? (<Navigate to="/email-verification" />) : (<Navigate to="/" />))}/>
+              <Route path="/create-post" element={<CreatePost />} />
+              {/* <Route path="/create-post" element={ verified ? ( <CreatePost /> ) : ( user ? (<Navigate to="/email-verification" />) : (<Navigate to="/" />))}/> */}
               <Route path="/dashboard" element={<Dashboard />} />
               <Route path="/confirm_email" element={<EmailVerif />} />
             </Routes>

@@ -1,0 +1,133 @@
+.App-Main {
+    text-align: center;
+    height: 100%;
+    font-family: sans-serif;
+    padding: 20px;
+    border:#000000;
+    background: linear-gradient(180deg, #292C33, black);
+    width: 99.9%;
+    height: auto;
+    display: inline-block;
+  }
+
+.animal-status{
+    font-size: 20px;
+    font-weight: bold;
+    color: #000000;
+    margin-bottom: 1px;
+}
+
+.animal-status label{
+    background-color: rgba(255, 255, 255, 0);
+}
+.top-form{
+    background-color: #00000000;
+}
+
+.Geolocation{
+    color: white;
+    margin-top: 1.5%;
+    margin-bottom: 0.5%;
+    font-weight: bold;
+}
+
+.Image-feature {
+    width: 100%; /* Adjust as needed */
+    height: auto; /* Maintains aspect ratio */
+    border-radius: 8px; /* Adjust the value as needed */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Adjust as needed */
+    transition: transform 0.3s ease-in-out;
+    transform: scale(1.1); /* Adjust the scale factor as needed */
+    color: white;
+}
+
+.animal-status-radio-buttons{
+    /* background-color: red; */
+    /* add a border */
+    display: grid;
+    place-items: center;
+    border: 2px solid rgb(85, 91, 107);
+}
+.animal-status {
+    font-size: 20px;
+    font-weight: bold;
+    color: #000000;
+    margin-bottom: 10px;
+}
+
+.animal-status label {
+    display: block;
+    margin-bottom: 2px;
+}
+
+.animal-status input {
+    margin-right: 5px; /* Adjust spacing between radio button and label as needed */
+}
+
+.additional-info {
+    border: 2px solid rgb(85, 91, 107);
+    padding: 20px; /* Add padding for better spacing */
+}
+
+.additional-info label {
+    background-color: #00000000;
+    color: #ffffff;
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 10px;
+    display: block;
+    padding: 10px;
+}
+
+.additional-info input[type="text"],
+.additional-info textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+/* Add styles for textarea if needed */
+.additional-info textarea {
+    resize: vertical; /* Allow vertical resizing of textarea */
+}
+
+
+.bottom-form {
+    width: 90%;
+    margin-left: 5%;
+    margin-right: 5%;
+    justify-content: center;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: auto;
+    gap: 20px;
+    margin-top: 2.5%;
+    position: relative; /* Ensure positioning context for pseudo-element */
+}
+
+.bottom-form::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 50%; /* Position the line in the middle horizontally */
+    transform: translateX(-50%);
+    width: 2.5px; /* Adjust the width of the line as needed */
+    height: 100%; /* Extend the line to cover the entire height of the grid item */
+    background-color: white; /* Set the color of the line */
+    z-index: 1; /* Ensure the line appears above the grid items */
+}
+.btn-sub{
+    margin-bottom: 300px;
+    background-color: white;
+    color: black;
+}
+
+.btn-sub:hover{
+    margin-bottom: 300px;
+    background-color: black;
+    color: white;
+}

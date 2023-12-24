@@ -53,11 +53,11 @@ def home():
 
 
 # updates page (recently lost animals)
-@app.route("/api/get/", methods=["GET"])
-@login_required
+@app.route("/api/get/all", methods=["GET"])
+# @login_required
 def get_all_posts():
-    post_list = Animal().getAll(db)
-    return jsonify({"Received Information": post_list[0]}), 200
+    animal = Animal().getAll(db)
+    return jsonify({"Received Information": animal}), 200
 
 # for image upload
 @app.route("/api/upload/", methods=["POST"])

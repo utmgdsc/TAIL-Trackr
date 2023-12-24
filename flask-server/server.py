@@ -4,18 +4,14 @@ from functools import wraps
 from db_manager import db_manager
 import os
 from dotenv import load_dotenv
-from flask_session import Session
+import sys
 
 load_dotenv()
 
 app = Flask(__name__)
-SECRET_KEY = os.getenv("secret_key") # add into .env
-SESSION_TYPE = 'filesystem'
 app.config.from_object(__name__)
-# app.secret_key = str(os.getenv("secret_key"))
-Session(app)
+app.secret_key = str(os.getenv("secret_key"))
 CORS(app)
-app.config.update(SESSION_COOKIE_SAMESITE="None", SESSION_COOKIE_SECURE=True)
 
 from user import User
 from animal import Animal
@@ -50,17 +46,21 @@ def home():
 # updates page (recently lost animals)
 @app.route("/api/get/", methods=["GET"])
 @login_required
-@cross_origin(supports_credentials=True)
 def get_all_posts():
     post_list = Animal().getAll(db)
     return jsonify({"Received Information": post_list[0]}), 200
 
 # for image upload
 @app.route("/api/upload/", methods=["POST"])
-@cross_origin(supports_credentials=True)
-@login_required
+# @login_required
 def upload_post():
     return Animal().postNew(db)
+
+# for image upload
+@app.route("/api/classify/", methods=["POST"])
+# @login_required
+def classify_post():
+    return Animal().getFeatures()
 
 # for registration
 @app.route("/api/user/register/", methods=["POST"])

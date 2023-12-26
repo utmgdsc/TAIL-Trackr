@@ -1,5 +1,7 @@
 from flask import Flask, jsonify, request, session
+from ML_MODEL.classifer import classify
 import uuid
+import base64
 
 class Animal:
     # retrieve all entries in the database
@@ -42,3 +44,9 @@ class Animal:
         db.postings.insert_one(new_post)
 
         return jsonify({"Data": data}), 200
+
+    def getFeatures(self):
+        data = dict(request.get_json(force=True))
+        
+        decoded_bytes = base64.b64decode(data["data"]["image"])
+        return jsonify(classify(decoded_bytes)), 200

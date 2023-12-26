@@ -75,6 +75,42 @@ function CreatePost() {
         }
     }
   };
+  
+  const classify = async () => {
+    setError(null)
+      // converting to bytes
+      const imageByteCode = await getBase64(selectedImage);
+      
+      if (!imageByteCode) {
+          return
+      }
+
+      // combining form data
+      const data = {
+          image: imageByteCode
+      }
+      console.log(imageByteCode)
+
+      // uploading all data
+      const response = await fetch(baseURL + "/api/classify/", {
+          method: "POST",
+          //credentials: "include",
+          headers: {
+              "Content-Type": "application/text",
+          },
+          body: JSON.stringify({ data })
+      });
+      
+      const json = await response.json();
+      
+      // if the response is bugged, output the error with it
+      if (!response.ok) {
+          setError(json.error)
+      }
+      else {
+          console.log(json)
+      }
+  };
 
     // converting data to b64
     const getBase64 = (file) => {
@@ -141,7 +177,7 @@ function CreatePost() {
             setSelectedImage(event.target.files[0]);
           }}
         />
-
+        <button onClick={classify}>Get Features</button>
         {/** finding location (change with google maps API instead) **/}
         {!isGeolocationAvailable ? (
           <div>Your browser does not allow location, please enter your location manually:</div>

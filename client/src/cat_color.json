@@ -1,0 +1,6 @@
+{
+    "black": ["Bombay", "Sphynx"],
+    "brown": ["Abyssinian", "Bengal", "Birman", "Maine_Coon"],
+    "grey": ["Birtish_Shorthair", "Egyptian_Mau", "Russian_Blue", "Maine_Coon"],
+    "white": ["Persian", "Sphynx", "Siamese", "Ragdoll", "Maine_Coon", "Birman"]
+  }

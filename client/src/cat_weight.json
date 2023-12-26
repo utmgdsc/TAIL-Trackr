@@ -1,0 +1,6 @@
+{
+    "light": ["Abyssinian", "Bengal", "Birman", "Bombay", "Birtish_Shorthair", "Egyptian_Mau", "Siamese", "Sphynx"],
+    "medium": ["Persian", "Russian_Blue"],
+    "heavy": ["Maine_Coon", "Ragdoll"]
+}
+  

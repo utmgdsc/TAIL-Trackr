@@ -66,6 +66,12 @@ def upload_post():
     print('reached here')
     return Animal().postNew(db)
 
+# for image classification
+@app.route("/api/classify/", methods=["POST"])
+# @login_required
+def classify_post():
+    return Animal().getFeatures()
+
 # for registration
 @app.route("/api/user/register/", methods=["POST"])
 def register():

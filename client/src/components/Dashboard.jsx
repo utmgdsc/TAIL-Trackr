@@ -6,8 +6,10 @@ import Maps from "./Posts-Layout/Maps"
 
 export default function Dashboard() {
   const [currentPage, setCurrentPage] = useState(1);
-  const postsPerPage = 9;
+  const [isLoading, setIsLoading] = useState(true);
+  const postsPerPage = 2;
   const [animalData, setAnimalData] = useState([]);
+  
 
   useEffect(() => {
       // Fetch animal data from the server
@@ -24,57 +26,7 @@ export default function Dashboard() {
       fetchData();
   }, [animalData]);
 
-  // console.log(animalData)
 
-    let state = {
-      data: [
-        {
-          uploader_name: "inaam",
-          image: "https://images.rawpixel.com/image_800/cHJpdmF0ZS9sci9pbWFnZXMvd2Vic2l0ZS8yMDIzLTA4L3Jhd3BpeGVsX29mZmljZV8xNV9waG90b19vZl9hX2RvZ19ydW5uaW5nX3dpdGhfb3duZXJfYXRfcGFya19lcF9mM2I3MDQyZC0zNWJlLTRlMTQtOGZhNy1kY2Q2OWQ1YzQzZjlfMi5qcGc.jpg",
-          name: "doggo",
-          animal: "Cat",
-          breed: "Persian",
-          specification: "cat rat",
-          match_rating: 0.5,
-          star: 1,
-          phone: "647-999-9999",
-
-        },
-        {
-          uploader_name: "dev",
-          image: "https://images.rawpixel.com/image_800/cHJpdmF0ZS9sci9pbWFnZXMvd2Vic2l0ZS8yMDIzLTA4L3Jhd3BpeGVsX29mZmljZV8xNV9waG90b19vZl9hX2RvZ19ydW5uaW5nX3dpdGhfb3duZXJfYXRfcGFya19lcF9mM2I3MDQyZC0zNWJlLTRlMTQtOGZhNy1kY2Q2OWQ1YzQzZjlfMi5qcGc.jpg",
-          name: "doggo",
-          animal: "Cat",
-          breed: "rat",
-          specification: "cat rat",
-          match_rating: 0.5,
-          star: 1,
-          phone: "647-999-9999",
-        },
-        {
-            uploader_name: "dev",
-            image: "https://images.rawpixel.com/image_800/cHJpdmF0ZS9sci9pbWFnZXMvd2Vic2l0ZS8yMDIzLTA4L3Jhd3BpeGVsX29mZmljZV8xNV9waG90b19vZl9hX2RvZ19ydW5uaW5nX3dpdGhfb3duZXJfYXRfcGFya19lcF9mM2I3MDQyZC0zNWJlLTRlMTQtOGZhNy1kY2Q2OWQ1YzQzZjlfMi5qcGc.jpg",
-            name: "doggo",
-            animal: "Dog",
-            breed: "Afghan",
-            specification: "cat rat",
-            match_rating: 0.5,
-            star: 1,
-            phone: "647-999-9999",
-          },
-          {
-            uploader_name: "dev",
-            image: "https://images.rawpixel.com/image_800/cHJpdmF0ZS9sci9pbWFnZXMvd2Vic2l0ZS8yMDIzLTA4L3Jhd3BpeGVsX29mZmljZV8xNV9waG90b19vZl9hX2RvZ19ydW5uaW5nX3dpdGhfb3duZXJfYXRfcGFya19lcF9mM2I3MDQyZC0zNWJlLTRlMTQtOGZhNy1kY2Q2OWQ1YzQzZjlfMi5qcGc.jpg",
-            name: "doggo",
-            animal: "Cat",
-            breed: "rat",
-            specification: "cat rat",
-            match_rating: 0.5,
-            star: 1,
-            phone: "647-999-9999",
-          },
-      ],
-    };
 
     const options = ["All", "Cat", "Dog"]
     const cat_options = ["All", "Abyssinian","Bengal","Birman","Bombay","British_Shorthair","Egyptian_Mau","Maine_Coon","Persian","Ragdoll","Russian_Blue","Siamese","Sphynx"]
@@ -89,7 +41,15 @@ export default function Dashboard() {
     
     const breed_options = selectedAnimal === 'Cat' ? cat_options : (selectedAnimal === 'Dog' ? dog_options : []);
 
+
       // Function to filter data based on selected animal and breed
+      const locations = animalData.map(item => ({
+        lat: item.latitude,
+        lng: item.longitude,
+        name: item.breed,
+      }));
+      console.log(locations)
+      
       const filterData = () => {
         const startIndex = (currentPage - 1) * postsPerPage;
         const endIndex = startIndex + postsPerPage;
@@ -123,13 +83,13 @@ export default function Dashboard() {
                 <Card className="Card" key={item.id} data={item} />
             ))}
             </div>
-            <div id="pagination">
+          <div className="pagination">
               <button disabled={currentPage === 1} onClick={() => setCurrentPage(currentPage - 1)}>Previous</button>
-              <span>Page {currentPage}</span>
+                <span>Page {currentPage}</span>
               <button disabled={currentPage * postsPerPage >= animalData.length} onClick={() => setCurrentPage(currentPage + 1)}>Next</button>
           </div>
             <div className="Map-Layout">
-              <Maps />
+              <Maps locations={locations} />
             </div>
         </div>
     );

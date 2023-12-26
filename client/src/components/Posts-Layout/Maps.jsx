@@ -1,5 +1,5 @@
-import React from 'react';
-import { GoogleMap, useLoadScript, Marker } from '@react-google-maps/api';
+import React, { useState } from 'react';
+import { GoogleMap, useLoadScript, Marker, InfoWindow } from '@react-google-maps/api';
 
 const libraries = ['places'];
 const API = "AIzaSyCd5DZyTEYIe0a21Uc_LDHGi7j2DjvdU5c";
@@ -17,7 +17,8 @@ const center1 = {
     lng: -79.766670, // default longitude
   };
 
-const Maps = () => {
+const Maps = (props) => {
+  const [selectedLocation, setSelectedLocation] = useState(null);
   const { isLoaded, loadError } = useLoadScript({
     googleMapsApiKey: API,
     libraries,
@@ -30,18 +31,33 @@ const Maps = () => {
   if (!isLoaded) {
     return <div>Loading maps</div>;
   }
-
   return (
-    <div>
+    <div className='map-container'>
       <GoogleMap
         mapContainerStyle={mapContainerStyle}
         zoom={10}
         center={center}
       >
-        <Marker position={center1} />
-        <Marker position={center} />
-        <Marker position={center1} />
-        <Marker position={center} />
+        {props.locations.map((item, index) => (
+          <Marker
+            key={index}
+            position={{ lat: item.lat, lng: item.lng }}
+            onClick={() => setSelectedLocation(item)}
+          />
+        ))}
+  
+        {selectedLocation && (
+        <InfoWindow
+          position={{ lat: selectedLocation.lat, lng: selectedLocation.lng }}
+          onCloseClick={() => setSelectedLocation(null)}
+        >
+          <div style={{ padding: '10px', maxWidth: '200px', textAlign: 'center' }}>
+            {/* Display additional information here */}
+            <h3 style={{ fontSize: '18px', marginBottom: '10px', marginTop: '0', color: 'black' }}></h3>{selectedLocation.name}
+            {/* Add more styling and content as needed */}
+          </div>
+        </InfoWindow>
+      )}
 
       </GoogleMap>
     </div>

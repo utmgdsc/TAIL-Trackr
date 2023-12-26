@@ -38,6 +38,14 @@ const Maps = (props) => {
         zoom={10}
         center={center}
       >
+        <Marker key={0} position={{lat: props.myLocationLat, lng: props.myLocationLon}} 
+        icon={{   
+          fillColor: "red",
+          fillOpacity: 2,
+          strokeWeight: 1,
+          rotation: 0,
+          scale: 1,
+        }}/>
         {props.locations.map((item, index) => (
           <Marker
             key={index}
@@ -45,6 +53,7 @@ const Maps = (props) => {
             onClick={() => setSelectedLocation(item)}
           />
         ))}
+
   
         {selectedLocation && (
         <InfoWindow

@@ -3,13 +3,31 @@ import "./Dashboard.css"
 import Card from "./Posts-Layout/Card";
 import Dropdown from "./Posts-Layout/Dropdown";
 import Maps from "./Posts-Layout/Maps"
+import { useGeolocated } from "react-geolocated";
+
 
 export default function Dashboard() {
   const [currentPage, setCurrentPage] = useState(1);
+  const [latitude, setLatitude] = useState(null);
+  const [longitude, setLongitude] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const postsPerPage = 2;
   const [animalData, setAnimalData] = useState([]);
-  
+
+    // tracking geolocation
+    const { coords, isGeolocationAvailable, isGeolocationEnabled } = useGeolocated({
+      positionOptions: {
+        enableHighAccuracy: false,
+      },
+      userDecisionTimeout: 3000,
+    });
+
+  useEffect(() => {
+    if (coords) {
+      setLongitude(coords.longitude);
+      setLatitude(coords.latitude);
+    }
+  }, [coords]);
 
   useEffect(() => {
       // Fetch animal data from the server
@@ -67,6 +85,16 @@ export default function Dashboard() {
       const filteredData = filterData();
     return (
         <div className="App-Main">
+          {/* Geolocation */}
+          {!isGeolocationAvailable ? (
+            <div>Your browser does not allow location, please enter your location manually:</div>
+          ) : !isGeolocationEnabled ? (
+            <div>Location is not enabled</div>
+          ) : coords ? (
+            <div>Location received</div>
+          ) : (
+            <div>Getting the location data</div>
+          )}
             <div className="App-dropdowns">
                 <Dropdown options={options} isActive={isActiveAnimal} setIsActive={setIsActiveAnimal} selected={selectedAnimal} setSelected={setSelectedAnimal} />
                 <Dropdown options={breed_options} isActive={isActiveBreed} setIsActive={setIsActiveBreed} selected={selectedBreed} setSelected={setSelectedBreed} />
@@ -89,7 +117,7 @@ export default function Dashboard() {
               <button disabled={currentPage * postsPerPage >= animalData.length} onClick={() => setCurrentPage(currentPage + 1)}>Next</button>
           </div>
             <div className="Map-Layout">
-              <Maps locations={locations} />
+              <Maps locations={locations} myLocationLat={latitude} myLocationLon={longitude} />
             </div>
         </div>
     );

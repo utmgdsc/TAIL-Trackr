@@ -76,7 +76,8 @@ function CreatePost() {
     }
   };
   
-  const classify = async () => {
+const classify = async (event) => {
+    event.preventDefault(); // Prevent default form submission behavior
     setError(null)
       // converting to bytes
       const imageByteCode = await getBase64(selectedImage);
@@ -102,13 +103,16 @@ function CreatePost() {
       });
       
       const json = await response.json();
-      
+
       // if the response is bugged, output the error with it
       if (!response.ok) {
           setError(json.error)
       }
       else {
-          console.log(json)
+          if (json['Breed'] == null) {
+            alert("Enter a dog or cat")
+            setSelectedImage(null)
+          }
       }
   };
 
@@ -156,92 +160,105 @@ function CreatePost() {
 
   return (
     <div className="App-Main">
-    {error && <div>The following error has occured: {error}</div>}
-      <h1>Upload Image of Animal Here</h1>
-      <form>
-        {selectedImage && (
-          <div>
-            <img
-              alt="not found"
-              width={"250px"}
-              src={URL.createObjectURL(selectedImage)}
-            />
-            <br />
+      {/* Top Form */}
+      <div className="top-form">
+        {error && <div className="error-message">The following error has occurred: {error}</div>}
+        <h1>Upload Image of Animal Here</h1>
+        <form>
+          <div className="image-preview">
+            {selectedImage && (
+              <div>
+                <img
+                  alt="not found"
+                  className="Image-feature"
+                  src={URL.createObjectURL(selectedImage)}
+                />
+                <br />
+              </div>
+            )}
           </div>
-        )}
-        <input
-          type="file"
-          name="myImage"
-          onChange={(event) => {
-            console.log(event.target.files[0]);
-            setSelectedImage(event.target.files[0]);
-          }}
-        />
-        <button onClick={classify}>Get Features</button>
-        {/** finding location (change with google maps API instead) **/}
-        {!isGeolocationAvailable ? (
-          <div>Your browser does not allow location, please enter your location manually:</div>
-        ) : !isGeolocationEnabled ? (
-          <div>Location is not enabled</div>
-        ) : coords ? (
-          <div>Location received</div>
-        ) : (
-          <div>Getting the location data</div>
-        )}
-
+          <input
+            type="file"
+            name="myImage"
+            onChange={(event) => {
+              console.log(event.target.files[0]);
+              setSelectedImage(event.target.files[0]);
+            }}
+          />
+          <button onClick={classify}>Get Features</button>
+  
+          {/* Geolocation */}
+          {!isGeolocationAvailable ? (
+            <div>Your browser does not allow location, please enter your location manually:</div>
+          ) : !isGeolocationEnabled ? (
+            <div>Location is not enabled</div>
+          ) : coords ? (
+            <div>Location received</div>
+          ) : (
+            <div>Getting the location data</div>
+          )}
+        </form>
+      </div>
+  
+      {/* Bottom Form */}
+      <div className="bottom-form">
+        {/* Animal Status Radio Buttons */}
         <div className="animal-status-radio-buttons">
-        <h2>Choose an Option:</h2>
-            <label>
-                <input
-                type="radio"
-                value="Lost"
-                checked={selectedAnimalStatus === "Lost"}
-                onChange={handleAnimalStatusChange}
-                />
-                Lost
-            </label>
-            <label>
-                <input
-                type="radio"
-                value="Stray"
-                checked={selectedAnimalStatus === "Stray"}
-                onChange={handleAnimalStatusChange}
-                />
-                Stray
-            </label>
-            <label>
-                <input
-                type="radio"
-                value="Don't Know"
-                checked={selectedAnimalStatus === "Don't Know"}
-                onChange={handleAnimalStatusChange}
-                />
-                Don't Know
-            </label>
-        </div>
-
-        <label>
-            Enter additional information which would help a user find their animal (i.e. where you found it (if not included already), if it has a collar or not...):
+          <h2>Choose an Option:</h2>
+          <label>
             <input
-                type="text"
-                value={description}
-                onChange={handleDescriptionChange}
+              type="radio"
+              value="Lost"
+              checked={selectedAnimalStatus === "Lost"}
+              onChange={handleAnimalStatusChange}
             />
-        </label>
-
-        <label>
+            Lost
+          </label>
+          <label>
+            <input
+              type="radio"
+              value="Stray"
+              checked={selectedAnimalStatus === "Stray"}
+              onChange={handleAnimalStatusChange}
+            />
+            Stray
+          </label>
+          <label>
+            <input
+              type="radio"
+              value="Don't Know"
+              checked={selectedAnimalStatus === "Don't Know"}
+              onChange={handleAnimalStatusChange}
+            />
+            Don't Know
+          </label>
+        </div>
+  
+        {/* Additional Information */}
+        <div className="additional-info">
+          <label>
+            Enter additional information which would help a user find their animal (i.e. where you found it, if it has a collar or not...):
+            <input
+              type="text"
+              value={description}
+              onChange={handleDescriptionChange}
+            />
+          </label>
+  
+          <label>
             Enter your phone number/email
             <input
-                type="text"
-                value={userPhone}
-                onChange={handlePhoneChange}
+              type="text"
+              value={userPhone}
+              onChange={handlePhoneChange}
             />
-        </label>
-        </form>
-      <button onClick={handleSubmit}>Submit</button>
-
+          </label>
+        </div>
+      </div>
+  
+      {/* Submit Button */}
+      <button className="btn-sub" onClick={handleSubmit}>Submit</button>
     </div>
-    
   );
 }
 

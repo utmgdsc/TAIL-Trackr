@@ -134,7 +134,7 @@ def classify(imageData):
         
         return {'Breed' : val,
                 'Features' : features,
-                'Animal' : 'dog'}
+                'Animal' : 'Dog'}
         
     elif predicted_class == 9:
         model = tf.keras.models.load_model(os.path.join('ML_MODEL', 'catmodel.h5'))
@@ -196,7 +196,7 @@ def classify(imageData):
 
         return {'Breed' : val,
                 'Features' : features,
-                'Animal' : 'dog'}
+                'Animal' : 'Cat'}
 
     else:
         print("please input a cat or a dog")

@@ -3,6 +3,8 @@ import { AccountCircle, Lock } from "@material-ui/icons";
 // import useRegister from "../hooks/useRegister";
 import {useNavigate} from "react-router-dom"
 import "./Register.css";
+import { useDispatch } from "react-redux";
+import { login } from "../features/user";
 
 export default function Register() {
   const [email, setEmail] = useState("");
@@ -13,6 +15,8 @@ export default function Register() {
   const [isOk, setIsOk] = useState(false)
   const navigate = useNavigate()
   const baseURL = "http://127.0.0.1:5000"
+
+  const dispatch = useDispatch()
 
   const handleSubmit = () => {
     register(email, password)
@@ -41,7 +45,9 @@ export default function Register() {
     }
     if (response.ok) {
         // save user to local storage
-        await localStorage.setItem("user", JSON.stringify(json))
+        const user = await JSON.stringify(json)
+        dispatch(login(user))
+        // await localStorage.setItem("user", JSON.stringify(json))
         // update auth context
         setIsOk(true)
         setIsLoading(false)
@@ -94,7 +100,7 @@ export default function Register() {
                   {error.includes("Email is already in use") && "Email is already in use"}
               </div>
           )}
-          {isLoading ? <div>Wait a moment please...</div> : ((isOk && !error) ? (() => { window.location.reload(); navigate("/email-verification"); })() : null)}
+          {isLoading ? <div>Wait a moment please...</div> : ((isOk && !error) ? (() => {navigate("/email-verification")})() : null)}
         </form>
 
         <button onClick={handleSubmit} className="submit-button">

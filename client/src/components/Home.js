@@ -11,14 +11,11 @@ export default class Home extends Component {
           selectedImage: null,
         };
       }
-
-
     render() {
         return (
             <div className="App-Main">
               <MainPage />
               <Features />
-
             </div>
           );
     }

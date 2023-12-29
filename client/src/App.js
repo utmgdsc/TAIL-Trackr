@@ -9,15 +9,21 @@ import NewPostPage from "./components/NewPostPage";
 import CreatePost from "./components/CreatePost";
 import Dashboard from "./components/Dashboard";
 import EmailVerif from "./components/EmailVerif";
+import EmailCheck from "./components/EmailCheck";
+import { useSelector } from "react-redux";
 
 // app component will control all routes within our program
 function App() {
-  const user = localStorage.getItem("user")
+  // const user = localStorage.getItem("user")
+  // let verified = false
+  // if (user){
+  //   verified = JSON.parse(user).verified
+  // }
+  const user = useSelector((state) => state.user.value)
   let verified = false
-  if (user){
-    verified = JSON.parse(user).verified
+  if (user) {
+    verified = user.verified
   }
-
     return (
       <div className="App">
         <BrowserRouter>
@@ -31,6 +37,7 @@ function App() {
               <Route path="/create-post" element={ verified ? ( <CreatePost /> ) : ( user ? (<Navigate to="/email-verification" />) : (<Navigate to="/" />))}/>
               <Route path="/dashboard" element={<Dashboard />} />
               <Route path="/confirm_email" element={<EmailVerif />} />
+              <Route path="/email-verification" element={<EmailCheck/>} />
             </Routes>
         </main>
         </BrowserRouter>

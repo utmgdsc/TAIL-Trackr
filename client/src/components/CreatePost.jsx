@@ -10,6 +10,8 @@ function CreatePost() {
   const [selectedAnimalStatus, setSelectedAnimalStatus] = useState(null);
   const [userPhone, setUserPhone] = useState("");
   const [description, setDescription] = useState("");
+  const [breed, setBreed] = useState("");
+  const [animal, setAnimal] = useState("");
   const baseURL = "http://127.0.0.1:5000"
 
   console.log(localStorage.getItem("user"))
@@ -46,18 +48,14 @@ function CreatePost() {
             animalStatus: selectedAnimalStatus,
             userDescription: description,
             phone: userPhone,
-            animal: "Cat",
-            breed: "Persian",
-            colour: "Black",
-            size: "Small",
-            weight: "Light"
-
+            animal: animal,
+            breed: breed
         }
 
         // uploading all data
         const response = await fetch(baseURL + "/api/upload/", {
             method: "POST",
-            // credentials: "include",
+            credentials: "include",
             headers: {
                 "Content-Type": "application/json",
             },
@@ -112,6 +110,10 @@ const classify = async (event) => {
           if (json['Breed'] == null) {
             alert("Enter a dog or cat")
             setSelectedImage(null)
+          } else {
+            setDescription(json['Features'])
+            setBreed(json['Breed'])
+            setAnimal(json["Animal"])
           }
       }
   };

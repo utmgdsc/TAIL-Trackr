@@ -72,8 +72,6 @@ def classify(imageData):
         probabilities = torch.nn.functional.softmax(outputs[0], dim=0)
         predicted_class = torch.argmax(probabilities).item()
         
-        
-        
     if predicted_class == 18:
         ## call the dog model
         model = tf.keras.models.load_model(os.path.join('ML_MODEL', 'dogmodel.h5'))
@@ -135,7 +133,8 @@ def classify(imageData):
             print(f)
         
         return {'Breed' : val,
-                'Features' : features}
+                'Features' : features,
+                'Animal' : 'dog'}
         
     elif predicted_class == 9:
         model = tf.keras.models.load_model(os.path.join('ML_MODEL', 'catmodel.h5'))
@@ -196,13 +195,13 @@ def classify(imageData):
             print(f)
 
         return {'Breed' : val,
-                'Features' : features}
+                'Features' : features,
+                'Animal' : 'dog'}
 
     else:
         print("please input a cat or a dog")
         
-        return {'Breed' : None,
-                'Features' : None}
+        return {'Breed' : None}
 
 
 

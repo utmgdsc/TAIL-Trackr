@@ -10,7 +10,9 @@ export default function EmailVerif() {
   const baseURL = "http://127.0.0.1:5000";
   const [error, setError] = useState(null);
   const [verified, setVerified] = useState(false);
-  const user = useSelector((state) => state.user.value)
+  const user = JSON.parse(useSelector((state) => state.user.value))
+  console.log(user)
+
 
   const dispatch = useDispatch()
 
@@ -19,7 +21,6 @@ export default function EmailVerif() {
     const verifyUser = async () => {
       setError(null);
       // const user = JSON.parse(localStorage.getItem('user'));
-
       if (user && id === user._id) {
         const response = await fetch(baseURL + '/api/verify/', {
           method: "POST",
@@ -36,7 +37,7 @@ export default function EmailVerif() {
           // saving verified user status
           user.verified = true;
           // localStorage.setItem("user", JSON.stringify(user))
-          dispatch(login(user))
+          dispatch(login(JSON.stringify(user)))
           
           console.log('User verified!');
           setVerified(true);

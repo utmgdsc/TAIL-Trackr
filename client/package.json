@@ -21,6 +21,7 @@
     "react-scripts": "5.0.1",
     "react-spring": "^9.7.3",
     "redux": "^5.0.1",
+    "redux-persist": "^6.0.0",
     "typed.js": "^2.0.16",
     "use-places-autocomplete": "^4.0.1",
     "web-vitals": "^2.1.4"

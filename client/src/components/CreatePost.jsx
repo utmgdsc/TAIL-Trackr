@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useGeolocated } from "react-geolocated";
 import "./CreatePost.css";
+import { useSelector } from "react-redux";
 
 function CreatePost() {
   const [selectedImage, setSelectedImage] = useState(null);
@@ -11,8 +12,9 @@ function CreatePost() {
   const [userPhone, setUserPhone] = useState("");
   const [description, setDescription] = useState("");
   const baseURL = "http://127.0.0.1:5000"
+  const email = JSON.parse(useSelector((state) => state.user.value)).email
 
-  console.log(localStorage.getItem("user"))
+  console.log(email)
   const handleSubmit = async () => {
     setError(null)
     if (selectedImage && latitude && longitude && selectedAnimalStatus && description) {
@@ -27,7 +29,7 @@ function CreatePost() {
         // combining form data
         const data = {
             image: imageByteCode,
-            userEmail: JSON.parse(localStorage.getItem("user")).email,
+            userEmail: email,
             location: {latitude: latitude, longitude: longitude},
             animalStatus: selectedAnimalStatus,
             userDescription: description,

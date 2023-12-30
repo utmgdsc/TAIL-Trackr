@@ -19,11 +19,12 @@ function App() {
   // if (user){
   //   verified = JSON.parse(user).verified
   // }
-  const user = useSelector((state) => state.user.value)
+  const user = JSON.parse(useSelector((state) => state.user.value))
   let verified = false
   if (user) {
     verified = user.verified
   }
+
     return (
       <div className="App">
         <BrowserRouter>

@@ -8,6 +8,7 @@ import { useSelector } from 'react-redux';
 function NavBar() {
   // Initialize user state with the value from localStorage or null if not present
   // const [user, setUser] = useState(localStorage.getItem('user') || null);
+  
   const user = useSelector((state) => state.user.value)
   const dispatch = useDispatch()
   const baseURL = "http://127.0.0.1:5000"

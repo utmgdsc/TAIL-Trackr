@@ -8,7 +8,7 @@ import userReducer from "./features/user";
 // Load state from localStorage
 const loadState = () => {
   try {
-    const serializedState = localStorage.getItem('reduxState');
+    const serializedState = localStorage.getItem('user');
     if (serializedState === null) {
       return undefined;
     }

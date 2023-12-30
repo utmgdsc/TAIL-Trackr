@@ -14,11 +14,6 @@ import { useSelector } from "react-redux";
 
 // app component will control all routes within our program
 function App() {
-  // const user = localStorage.getItem("user")
-  // let verified = false
-  // if (user){
-  //   verified = JSON.parse(user).verified
-  // }
   const user = JSON.parse(useSelector((state) => state.user.value))
   let verified = false
   if (user) {

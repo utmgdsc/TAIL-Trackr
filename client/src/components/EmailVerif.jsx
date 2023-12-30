@@ -20,6 +20,7 @@ export default function EmailVerif() {
   useEffect(() => {
     const verifyUser = async () => {
       setError(null);
+      
       // const user = JSON.parse(localStorage.getItem('user'));
       if (user && id === user._id) {
         const response = await fetch(baseURL + '/api/verify/', {
@@ -27,9 +28,8 @@ export default function EmailVerif() {
           headers: { "content-type": "application/json" },
           body: JSON.stringify({ email: user.email }),
         });
-
         const json = await response.json();
-
+        
         if (!response.ok) {
           setError(json.Error);
         }
@@ -38,10 +38,12 @@ export default function EmailVerif() {
           user.verified = true;
           // localStorage.setItem("user", JSON.stringify(user))
           dispatch(login(JSON.stringify(user)))
-          
-          console.log('User verified!');
+          // console.log('User verified!');
           setVerified(true);
         }
+      }
+      else {
+        setError({"Error": "IDs do not match"})
       }
     };
 

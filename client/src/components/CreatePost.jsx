@@ -18,6 +18,12 @@ function CreatePost() {
   const handleSubmit = async () => {
     setError(null)
     if (selectedImage && latitude && longitude && selectedAnimalStatus && description) {
+        if (!breed) {
+          await classify();
+          if (!breed) {
+            return;
+          }
+        }
 
         // converting to bytes
         const imageByteCode = await getBase64(selectedImage);
@@ -75,7 +81,11 @@ function CreatePost() {
   };
   
 const classify = async (event) => {
-    event.preventDefault(); // Prevent default form submission behavior
+    if (!selectedImage) {
+      return;
+    }
+
+    event.preventDefault();
     setError(null)
       // converting to bytes
       const imageByteCode = await getBase64(selectedImage);
@@ -111,7 +121,11 @@ const classify = async (event) => {
             alert("Enter a dog or cat")
             setSelectedImage(null)
           } else {
-            setDescription(json['Features'])
+            if (description != ""){
+              setDescription(description + ", " + json['Features'])
+            } else {
+              setDescription(json['Features'])
+            }
             setBreed(json['Breed'])
             setAnimal(json["Animal"])
           }
@@ -188,7 +202,6 @@ const classify = async (event) => {
             }}
           />
           <button onClick={classify}>Get Features</button>
-  
           {/* Geolocation */}
           {!isGeolocationAvailable ? (
             <div>Your browser does not allow location, please enter your location manually:</div>

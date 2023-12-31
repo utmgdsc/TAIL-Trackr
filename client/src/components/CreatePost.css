@@ -32,7 +32,7 @@
 }
 
 .Image-feature {
-    width: 100%; /* Adjust as needed */
+    width: 150px; /* Adjust as needed */
     height: auto; /* Maintains aspect ratio */
     border-radius: 8px; /* Adjust the value as needed */
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Adjust as needed */

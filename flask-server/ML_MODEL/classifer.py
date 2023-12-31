@@ -98,7 +98,6 @@ def classify(imageData):
 
 
         label_mapper = np.asarray(list(train_data.class_indices.keys()))
-        
         img = load_img(BytesIO(imageData[15:]), target_size=DIMS)
 
 
@@ -133,7 +132,7 @@ def classify(imageData):
             print(f)
         
         return {'Breed' : val,
-                'Features' : features,
+                'Features' : ", ".join(features.split(" ")),
                 'Animal' : 'Dog'}
         
     elif predicted_class == 9:

@@ -61,3 +61,14 @@
     margin-top: 70px; /* Adjust as needed */
   }
   
+  .btn-nav{
+    text-decoration: none;
+    font-size: 18px;
+    font-weight: bold;
+    background-color: #ffffff00;
+    color: #FFFFFF;
+    margin: 0;
+    padding: 0;
+    width: 130%;
+  
+  }

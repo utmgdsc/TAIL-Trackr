@@ -6,7 +6,6 @@ const API = "AIzaSyCd5DZyTEYIe0a21Uc_LDHGi7j2DjvdU5c";
 const mapContainerStyle = {
   width: '80vw',
   height: '100vh',
-  
 };
 const center = {
   lat: 43.595310, // default latitude
@@ -69,6 +68,7 @@ const Maps = (props) => {
       )}
 
       </GoogleMap>
+      <button onClick={e=>(console.log(process.env))}>Click me</button>
     </div>
   );
 };

@@ -94,7 +94,7 @@ export default function Register() {
                   {error.includes("Email is already in use") && "Email is already in use"}
               </div>
           )}
-          {isLoading ? <div>Wait a moment please...</div> : ((isOk && !error) ? navigate("/email-verification") : null)}
+          {isLoading ? <div>Wait a moment please...</div> : ((isOk && !error) ? (() => { window.location.reload(); navigate("/email-verification"); })() : null)}
         </form>
 
         <button onClick={handleSubmit} className="submit-button">

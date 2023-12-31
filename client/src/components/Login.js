@@ -3,6 +3,8 @@ import { AccountCircle, Iso, Lock } from "@material-ui/icons";
 // import useLogin from "../hooks/useLogin";
 import { useNavigate } from "react-router-dom";
 import "./Login.css";
+import { useDispatch } from "react-redux";
+import {login} from "../features/user"
 
 export default function Login() {
   const [email, setEmail] = useState("");
@@ -13,12 +15,13 @@ export default function Login() {
   // const { login, error, isLoading } = useLogin();
   const navigate = useNavigate()
   const baseURL = "http://127.0.0.1:5000"
+  const dispatch = useDispatch()
 
   const handleSubmit = () => {
-    login(email, password);
+    loginUser(email, password);
   };
 
-  const login = async (email, password) => {
+  const loginUser = async (email, password) => {
     // used for error handling
     setIsLoading(true)
     setError(null)
@@ -42,7 +45,12 @@ export default function Login() {
     }
     if (response.ok) {
         // save user to local storage
-        localStorage.setItem("user", JSON.stringify(json))
+        // localStorage.setItem("user", JSON.stringify(json))
+        const user = await JSON.stringify(json)
+        dispatch(login(user))
+
+        console.log(user)
+
         // update auth context
         setIsOk(true)
         setIsLoading(false)
@@ -89,7 +97,7 @@ export default function Login() {
           </div>
 
           {error && <div className="error-message">Sorry, incorrect email or password.</div>}
-          {isLoading ? <div>Wait a moment please...</div> : ((isOk && !error) ? (() => { window.location.reload(); navigate("/"); })() : null)}
+          {isLoading ? <div>Wait a moment please...</div> : ((isOk && !error) ? (() => {navigate("/")})() : null)}
         </form>
 
         <button onClick={handleSubmit} className="submit-button">

@@ -50,7 +50,7 @@ function NavBar() {
           <>
             {/* Logged in */}
             <li>
-              <button onClick={logout}>Logout</button>
+              <button className='btn-nav' onClick={logout}>Logout</button>
             </li>
           </>
         ) : (

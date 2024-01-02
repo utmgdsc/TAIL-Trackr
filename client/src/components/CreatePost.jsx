@@ -15,8 +15,8 @@ function CreatePost() {
   const [breed, setBreed] = useState("");
   const [animal, setAnimal] = useState("");
   const baseURL = "http://127.0.0.1:5000"
-  // const email = JSON.parse(useSelector((state) => state.user.value)).email
-  const email = "inaam"
+  const email = JSON.parse(useSelector((state) => state.user.value)).email
+  // const email = "inaam"
 
   console.log(email)
   const handleSubmit = async () => {

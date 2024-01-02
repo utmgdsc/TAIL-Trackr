@@ -33,7 +33,8 @@ export default function Dashboard() {
   useEffect(() => {
       // Fetch animal data from the server
       const fetchData = async () => {
-          try {
+        setIsLoading(true);   
+        try {
               const response = await fetch("http://127.0.0.1:5000/api/get/all");
               const data = await response.json();
               console.log(data);
@@ -41,6 +42,9 @@ export default function Dashboard() {
           } catch (error) {
               console.error("Error fetching animal data:", error);
           }
+        finally {
+          setIsLoading(false);
+        }
       };
 
       fetchData();
@@ -133,6 +137,12 @@ export default function Dashboard() {
           ) : (
             <div>Getting the location data</div>
           )}
+
+      {animalData.length < 1 ? ( // Check if isLoading is true or animalData has less than 1 item
+        <div className="loading">Loading...</div>
+        ) :
+        (
+          <>
             <div className="App-dropdowns">
                 <Dropdown options={options} isActive={isActiveAnimal} setIsActive={setIsActiveAnimal} selected={selectedAnimal} setSelected={setSelectedAnimal} />
                 <Dropdown options={breed_options} isActive={isActiveBreed} setIsActive={setIsActiveBreed} selected={selectedBreed} setSelected={setSelectedBreed} />
@@ -157,7 +167,9 @@ export default function Dashboard() {
             <div className="Map-Layout">
               <Maps locations={locations} myLocationLat={latitude} myLocationLon={longitude} />
             </div>
-        </div>
+            </>
+        )
+             } </div>
     );
             
 }

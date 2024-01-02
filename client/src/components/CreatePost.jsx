@@ -11,6 +11,8 @@ function CreatePost() {
   const [selectedAnimalStatus, setSelectedAnimalStatus] = useState(null);
   const [userPhone, setUserPhone] = useState("");
   const [description, setDescription] = useState("");
+  const [breed, setBreed] = useState("");
+  const [animal, setAnimal] = useState("");
   const baseURL = "http://127.0.0.1:5000"
   const email = JSON.parse(useSelector((state) => state.user.value)).email
 
@@ -18,6 +20,12 @@ function CreatePost() {
   const handleSubmit = async () => {
     setError(null)
     if (selectedImage && latitude && longitude && selectedAnimalStatus && description) {
+        if (!breed) {
+          await classify();
+          if (!breed) {
+            return;
+          }
+        }
 
         // converting to bytes
         const imageByteCode = await getBase64(selectedImage);
@@ -26,6 +34,20 @@ function CreatePost() {
             return
         }
 
+        // "_id": uuid.uuid4().hex,
+        // "uploader": data["data"]["userEmail"],
+        // "image": data["data"]["image"],
+        // "latitude": data["data"]["location"]["latitude"],
+        // "longitude": data["data"]["location"]["longitude"],
+        // "animalStatus": data["data"]["animalStatus"],
+        // "userDescription": data["data"]["userDescription"],
+        // "phoneNumber": data["data"]["phone"],
+        // "animal": data["data"]["animal"],
+        // "breed": data["data"]["breed"],
+        // "colour": data["data"]["colour"],
+        // "size": data["data"]["size"],
+        // "weight": data["data"]["weight"]
+
         // combining form data
         const data = {
             image: imageByteCode,
@@ -33,13 +55,15 @@ function CreatePost() {
             location: {latitude: latitude, longitude: longitude},
             animalStatus: selectedAnimalStatus,
             userDescription: description,
-            phone: userPhone
+            phone: userPhone,
+            animal: animal,
+            breed: breed
         }
 
         // uploading all data
         const response = await fetch(baseURL + "/api/upload/", {
             method: "POST",
-            // credentials: "include",
+            credentials: "include",
             headers: {
                 "Content-Type": "application/json",
             },
@@ -56,6 +80,58 @@ function CreatePost() {
             console.log(json)
         }
     }
+  };
+  
+const classify = async (event) => {
+    if (!selectedImage) {
+      return;
+    }
+
+    event.preventDefault();
+    setError(null)
+      // converting to bytes
+      const imageByteCode = await getBase64(selectedImage);
+      
+      if (!imageByteCode) {
+          return
+      }
+
+      // combining form data
+      const data = {
+          image: imageByteCode
+      }
+      console.log(imageByteCode)
+
+      // uploading all data
+      const response = await fetch(baseURL + "/api/classify/", {
+          method: "POST",
+          //credentials: "include",
+          headers: {
+              "Content-Type": "application/text",
+          },
+          body: JSON.stringify({ data })
+      });
+      
+      const json = await response.json();
+
+      // if the response is bugged, output the error with it
+      if (!response.ok) {
+          setError(json.error)
+      }
+      else {
+          if (json['Breed'] == null) {
+            alert("Enter a dog or cat")
+            setSelectedImage(null)
+          } else {
+            if (description != ""){
+              setDescription(description + ", " + json['Features'])
+            } else {
+              setDescription(json['Features'])
+            }
+            setBreed(json['Breed'])
+            setAnimal(json["Animal"])
+          }
+      }
   };
 
     // converting data to b64
@@ -102,99 +178,104 @@ function CreatePost() {
 
   return (
     <div className="App-Main">
-    {error && <div>The following error has occured: {error}</div>}
-      <h1>Upload Image of Animal Here</h1>
-      <div>
+      {/* Top Form */}
+      <div className="top-form">
+        {error && <div className="error-message">The following error has occurred: {error}</div>}
+        <h1>Upload Image of Animal Here</h1>
         <form>
-          <div className="top-form">
-            <div className="Image-feature">
-              {selectedImage && (
-                <div>
-                  <img
-                    alt="not found"
-                    width={"250px"}
-                    src={URL.createObjectURL(selectedImage)}
-                  />
-                  <br />
-                </div>
-              )}
-              <input
-                type="file"
-                name="myImage"
-                onChange={(event) => {
-                  console.log(event.target.files[0]);
-                  setSelectedImage(event.target.files[0]);
-                }}
-              /> 
-            </div>
-            <div className="Geolocation">
-              {/** finding location (change with google maps API instead) **/}
-              {!isGeolocationAvailable ? (
-                <div>Your browser does not allow location, please enter your location manually:</div>
-              ) : !isGeolocationEnabled ? (
-                <div>Location is not enabled</div>
-              ) : coords ? (
-                <div>Location received</div>
-              ) : (
-                <div>Getting the location data</div>
-              )}
-            </div>
+          <div className="image-preview">
+            {selectedImage && (
+              <div>
+                <img
+                  alt="not found"
+                  className="Image-feature"
+                  src={URL.createObjectURL(selectedImage)}
+                />
+                <br />
+              </div>
+            )}
           </div>
-          <div className="bottom-form">
-            <div className="animal-status-radio-buttons">
-              <h2>Choose an Option:</h2>
-                <div className="animal-status">
-                    <label>
-                        <input
-                        type="radio"
-                        value="Lost"
-                        checked={selectedAnimalStatus === "Lost"}
-                        onChange={handleAnimalStatusChange}
-                        />
-                        Lost
-                    </label>
-                    <label>
-                        <input
-                        type="radio"
-                        value="Stray"
-                        checked={selectedAnimalStatus === "Stray"}
-                        onChange={handleAnimalStatusChange}
-                        />
-                        Stray
-                    </label>
-                    <label>
-                        <input
-                        type="radio"
-                        value="Don't Know"
-                        checked={selectedAnimalStatus === "Don't Know"}
-                        onChange={handleAnimalStatusChange}
-                        />
-                        Don't Know
-                    </label>
-                  </div>
-            </div>
-            <div className="additional-info">
-              <label>
-                  Enter Additional Information:
-                  <textarea value={description} rows={4} cols={30} onChange={handleDescriptionChange} ></textarea>
-              </label>
-
-              <label>
-                  Enter your phone number/email
-                  <input
-                      type="text"
-                      value={userPhone}
-                      onChange={handlePhoneChange}
-                  />
-              </label>
-            </div>
-          </div>
-          </form>
+          <input
+            type="file"
+            name="myImage"
+            onChange={(event) => {
+              console.log(event.target.files[0]);
+              setSelectedImage(event.target.files[0]);
+            }}
+          />
+          <button onClick={classify}>Get Features</button>
+          {/* Geolocation */}
+          {!isGeolocationAvailable ? (
+            <div>Your browser does not allow location, please enter your location manually:</div>
+          ) : !isGeolocationEnabled ? (
+            <div>Location is not enabled</div>
+          ) : coords ? (
+            <div>Location received</div>
+          ) : (
+            <div>Getting the location data</div>
+          )}
+        </form>
+      </div>
+  
+      {/* Bottom Form */}
+      <div className="bottom-form">
+        {/* Animal Status Radio Buttons */}
+        <div className="animal-status-radio-buttons">
+          <h2>Choose an Option:</h2>
+          <label>
+            <input
+              type="radio"
+              value="Lost"
+              checked={selectedAnimalStatus === "Lost"}
+              onChange={handleAnimalStatusChange}
+            />
+            Lost
+          </label>
+          <label>
+            <input
+              type="radio"
+              value="Stray"
+              checked={selectedAnimalStatus === "Stray"}
+              onChange={handleAnimalStatusChange}
+            />
+            Stray
+          </label>
+          <label>
+            <input
+              type="radio"
+              value="Don't Know"
+              checked={selectedAnimalStatus === "Don't Know"}
+              onChange={handleAnimalStatusChange}
+            />
+            Don't Know
+          </label>
         </div>
+  
+        {/* Additional Information */}
+        <div className="additional-info">
+          <label>
+            Enter additional information which would help a user find their animal (i.e. where you found it, if it has a collar or not...):
+            <input
+              type="text"
+              value={description}
+              onChange={handleDescriptionChange}
+            />
+          </label>
+  
+          <label>
+            Enter your phone number/email
+            <input
+              type="text"
+              value={userPhone}
+              onChange={handlePhoneChange}
+            />
+          </label>
+        </div>
+      </div>
+  
+      {/* Submit Button */}
       <button className="btn-sub" onClick={handleSubmit}>Submit</button>
-
     </div>
-    
   );
 }
 

@@ -1,0 +1,30 @@
+/* styles.css (or any other name you prefer) */
+
+/* Style for the map container */
+.map-container {
+    width: 80vw;
+    height: 100vh;
+    margin: 20px auto; /* Adjust as needed */
+    position: relative;
+    flex: auto;
+    text-align: center;
+    justify-content: center;
+    margin: 0 auto;
+  }
+  
+  /* Style for the custom markers */
+  .custom-marker {
+    width: 30px;
+    height: 30px;
+    background-color: #ff0000; /* Adjust the color as needed */
+    border-radius: 50%;
+    position: absolute;
+    transform: translate(-50%, -50%);
+  }
+  
+  /* Additional styling for the map if needed */
+  .google-map {
+    border-radius: 10px;
+    overflow: hidden;
+  }
+  

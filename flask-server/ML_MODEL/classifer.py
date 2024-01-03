@@ -46,7 +46,7 @@ import os
 ### ---------------------------------- ###
 
 def preprocess_image(imageData):
-    img = Image.open(BytesIO(imageData[15:])).convert('RGB')
+    img = Image.open(BytesIO(imageData)).convert('RGB')
     preprocess = transforms.Compose([
         transforms.Resize(256),
         transforms.CenterCrop(256),
@@ -98,9 +98,9 @@ def classify(imageData):
 
 
         label_mapper = np.asarray(list(train_data.class_indices.keys()))
-        img = load_img(BytesIO(imageData[15:]), target_size=DIMS)
+        img = load_img(BytesIO(imageData), target_size=DIMS)
 
-
+        
         def predictor(img):
             #display(img)
             arr = img_to_array(img)
@@ -132,7 +132,7 @@ def classify(imageData):
             print(f)
         
         return {'Breed' : val,
-                'Features' : ", ".join(features.split(" ")),
+                'Features' : features,
                 'Animal' : 'Dog'}
         
     elif predicted_class == 9:
@@ -172,7 +172,7 @@ def classify(imageData):
             idx = res.argmax()
             return label_mapper1[idx], res[0][idx]
 
-        img = load_img(BytesIO(imageData[15:]), target_size=DIMS)
+        img = load_img(BytesIO(imageData), target_size=DIMS)
 
         val,prob = predictor1(img)
 

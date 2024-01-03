@@ -2,6 +2,7 @@ from flask import Flask, jsonify, request, session
 from ML_MODEL.classifer import classify
 import uuid
 import base64
+from difflib import Differ
 
 class Animal:
     # retrieve all entries in the database
@@ -44,6 +45,5 @@ class Animal:
 
     def getFeatures(self):
         data = dict(request.get_json(force=True))
-        
-        decoded_bytes = base64.b64decode(data["data"]["image"])
+        decoded_bytes = base64.b64decode(data["data"]["image"].split(',')[1])
         return jsonify(classify(decoded_bytes)), 200

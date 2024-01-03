@@ -11,7 +11,7 @@ export default function Dashboard() {
   const [latitude, setLatitude] = useState(null);
   const [longitude, setLongitude] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
-  const postsPerPage = 2;
+  const postsPerPage = 9;
   const [animalData, setAnimalData] = useState([]);
 
     // tracking geolocation

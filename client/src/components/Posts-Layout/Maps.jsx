@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { GoogleMap, useLoadScript, Marker, InfoWindow } from '@react-google-maps/api';
+import { GoogleMap, useLoadScript, MarkerF, InfoWindow } from '@react-google-maps/api';
+
 
 const libraries = ['places'];
 const API = "AIzaSyCd5DZyTEYIe0a21Uc_LDHGi7j2DjvdU5c";
@@ -11,10 +12,7 @@ const center = {
   lat: 43.595310, // default latitude
   lng: -79.640579, // default longitude
 };
-const center1 = {
-    lat: 43.7315, // default latitude
-    lng: -79.766670, // default longitude
-  };
+
 
 const Maps = (props) => {
   const [selectedLocation, setSelectedLocation] = useState(null);
@@ -22,6 +20,15 @@ const Maps = (props) => {
     googleMapsApiKey: API,
     libraries,
   });
+  const image =
+    "https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png";
+
+  React.useEffect(() => {
+    console.log('Component rendered');
+    console.log('props.locations:', props.locations);
+    // Additional logs as needed
+  }, [props.locations]);
+  
 
   if (loadError) {
     return <div>Error loading maps</div>;
@@ -37,19 +44,15 @@ const Maps = (props) => {
         zoom={10}
         center={center}
       >
-        <Marker key={0} position={{lat: props.myLocationLat, lng: props.myLocationLon}} 
-        icon={{   
-          fillColor: "red",
-          fillOpacity: 2,
-          strokeWeight: 1,
-          rotation: 0,
-          scale: 1,
-        }}/>
+        <MarkerF key={1000} position={{lat: props.myLocationLat, lng: props.myLocationLon}}/>
+        
         {props.locations.map((item, index) => (
-          <Marker
+          <MarkerF
             key={index}
             position={{ lat: item.lat, lng: item.lng }}
             onClick={() => setSelectedLocation(item)}
+            icon={{image}}
+
           />
         ))}
 
@@ -68,7 +71,6 @@ const Maps = (props) => {
       )}
 
       </GoogleMap>
-      <button onClick={e=>(console.log(process.env))}>Click me</button>
     </div>
   );
 };

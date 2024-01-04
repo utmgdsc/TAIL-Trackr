@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useGeolocated } from "react-geolocated";
 import "./CreatePost.css";
 import { useSelector } from "react-redux";
+import MyList from "./MyList";
 
 function CreatePost() {
   const [selectedImage, setSelectedImage] = useState(null);
@@ -14,11 +15,19 @@ function CreatePost() {
   const [breed, setBreed] = useState("");
   const [animal, setAnimal] = useState("");
   const baseURL = "http://127.0.0.1:5000"
-  const email = JSON.parse(useSelector((state) => state.user.value)).email
+  // const email = JSON.parse(useSelector((state) => state.user.value)).email
+  const email = "inaam"
 
   console.log(email)
+  const phoneRegex = /^\d{3}-\d{3}-\d{4}$/;
   const handleSubmit = async () => {
     setError(null)
+
+    if (!phoneRegex.test(userPhone)) {
+      setError("Please enter a valid phone number in the format XXX-XXX-XXXX");
+      return;
+    }
+
     if (selectedImage && latitude && longitude && selectedAnimalStatus && description) {
         if (!breed) {
           await classify();
@@ -177,7 +186,7 @@ const classify = async (event) => {
   }, [coords]);
 
   return (
-    <div className="App-Main">
+    <div className="App-Main1">
       {/* Top Form */}
       <div className="top-form">
         {error && <div className="error-message">The following error has occurred: {error}</div>}
@@ -197,20 +206,24 @@ const classify = async (event) => {
           </div>
           <input
             type="file"
+            className="file-inp"
             name="myImage"
             onChange={(event) => {
               console.log(event.target.files[0]);
               setSelectedImage(event.target.files[0]);
             }}
           />
-          <button onClick={classify}>Get Features</button>
+          {/* <label for="imageInput" className="file-label">
+              Choose Image
+         </label> */}
+          <button className="btn-class" onClick={classify}>Get Features</button>
           {/* Geolocation */}
           {!isGeolocationAvailable ? (
             <div>Your browser does not allow location, please enter your location manually:</div>
           ) : !isGeolocationEnabled ? (
-            <div>Location is not enabled</div>
+            <div className="loc-dis">Location is not enabled</div>
           ) : coords ? (
-            <div>Location received</div>
+            <div className="loc-en">Location received</div>
           ) : (
             <div>Getting the location data</div>
           )}
@@ -221,7 +234,8 @@ const classify = async (event) => {
       <div className="bottom-form">
         {/* Animal Status Radio Buttons */}
         <div className="animal-status-radio-buttons">
-          <h2>Choose an Option:</h2>
+          <h2>Animal Status:</h2>
+          <div className="animals-stat">
           <label>
             <input
               type="radio"
@@ -249,6 +263,7 @@ const classify = async (event) => {
             />
             Don't Know
           </label>
+          </div>
         </div>
   
         {/* Additional Information */}
@@ -263,11 +278,13 @@ const classify = async (event) => {
           </label>
   
           <label>
-            Enter your phone number/email
+            Enter your Phone Number (XXX-XXX-XXXX)
             <input
               type="text"
               value={userPhone}
               onChange={handlePhoneChange}
+              className={error ? "error-input" : ""} // Apply the class conditionally
+
             />
           </label>
         </div>

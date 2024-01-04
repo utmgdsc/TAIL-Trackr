@@ -106,29 +106,32 @@ export default function Dashboard() {
       const slicedData = animalData.slice(startIndex, endIndex);
     
       const searchTermArray = searchTerm.toLowerCase().split(/\s+/);
-    
+
       const filteredAndSortedData = slicedData
-        .filter((item) => {
-          const isAnimalMatch =
-            selectedAnimal === "All" || selectedAnimal === "Animal" || item.animal === selectedAnimal;
-          const isBreedMatch = selectedBreed === "All" || selectedBreed === "Breed" || item.breed === selectedBreed;
-    
-          // Check if any of the search terms are present in userDescription
-          const isDescriptionMatch = searchTermArray.every(
-            (term) => item.userDescription.toLowerCase().includes(term)
-          );
-    
-          return isAnimalMatch && isBreedMatch && isDescriptionMatch;
-        })
-        .map((item) => {
-          const distance = haversineDistance([latitude, longitude], [item.latitude, item.longitude]);
-          return { ...item, distance };
-        })
-        .sort((a, b) => parseFloat(a.distance) - parseFloat(b.distance))
-        .map((item, index) => ({ ...item, index: index + startIndex }));
-    
+      .filter((item) => {
+        const isAnimalMatch = selectedAnimal === "All" || selectedAnimal === "Animal" || item.animal === selectedAnimal;
+        const isBreedMatch = selectedBreed === "All" || selectedBreed === "Breed" || item.breed === selectedBreed;
+
+        // Check if any of the search terms are present in userDescription
+        const isDescriptionMatch = searchTermArray.every((term) => {
+          // Check if item.userDescription is a string before performing operations
+          const isString = typeof item.userDescription === 'string';
+          const isMatch = isString && item.userDescription.toLowerCase().includes(term.toLowerCase());
+          return isString ? isMatch : false; // Return false for non-string userDescription
+        });
+
+        return isAnimalMatch && isBreedMatch && isDescriptionMatch;
+      })
+      .map((item) => {
+        const distance = haversineDistance([latitude, longitude], [item.latitude, item.longitude]);
+        return { ...item, distance };
+      })
+      .sort((a, b) => parseFloat(a.distance) - parseFloat(b.distance))
+      .map((item, index) => ({ ...item, index: index + startIndex }));
+
       return filteredAndSortedData;
-    };
+      };
+
     
     
     

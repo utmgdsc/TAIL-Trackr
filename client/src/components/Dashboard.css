@@ -34,11 +34,25 @@
   transition: width 0.3s ease-in-out;
 }
 
+.user-inp{
+  padding: 10px;
+  width: 400px;
+  margin: 0 auto;
+  background-color: white;
+  box-shadow: 3px 3px 10px 6px rgba(0,0,0,0.1);
+  font-weight: bold;
+  color: #333;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
 
 .App-dropdowns{
   display: flex;
   justify-content: space-between;
   margin: 1;
+  margin-top: 20px;
   transition: 0.2s;
   z-index: 2; /* Adjust the value based on your layout */
   position: relative; /* or absolute, fixed, etc. */

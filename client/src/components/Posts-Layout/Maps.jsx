@@ -44,7 +44,7 @@ const Maps = (props) => {
         zoom={10}
         center={center}
       >
-        <MarkerF key={1000} position={{lat: props.myLocationLat, lng: props.myLocationLon}}/>
+        {/* <MarkerF key={1000} icon=position={{lat: props.myLocationLat, lng: props.myLocationLon}}/> */}
         
         {props.locations.map((item, index) => (
           <MarkerF

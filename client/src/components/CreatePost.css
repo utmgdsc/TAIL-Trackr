@@ -78,6 +78,10 @@
 
 }
 
+.error-input {
+    border: 1px solid red; /* Set the border color to red for highlighting */
+  }
+
 .additional-info label {
     background-color: #00000000;
     color: #ffffff;

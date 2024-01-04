@@ -15,12 +15,19 @@ function CreatePost() {
   const [breed, setBreed] = useState("");
   const [animal, setAnimal] = useState("");
   const baseURL = "http://127.0.0.1:5000"
-  const email = JSON.parse(useSelector((state) => state.user.value)).email
-  // const email = "inaam"
+  // const email = JSON.parse(useSelector((state) => state.user.value)).email
+  const email = "inaam"
 
   console.log(email)
+  const phoneRegex = /^\d{3}-\d{3}-\d{4}$/;
   const handleSubmit = async () => {
     setError(null)
+
+    if (!phoneRegex.test(userPhone)) {
+      setError("Please enter a valid phone number in the format XXX-XXX-XXXX");
+      return;
+    }
+
     if (selectedImage && latitude && longitude && selectedAnimalStatus && description) {
         if (!breed) {
           await classify();
@@ -271,11 +278,13 @@ const classify = async (event) => {
           </label>
   
           <label>
-            Enter your phone number/email
+            Enter your Phone Number (XXX-XXX-XXXX)
             <input
               type="text"
               value={userPhone}
               onChange={handlePhoneChange}
+              className={error ? "error-input" : ""} // Apply the class conditionally
+
             />
           </label>
         </div>

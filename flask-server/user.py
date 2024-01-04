@@ -12,11 +12,25 @@ class User:
     def validate_password(self, password):
         return len(password) >= 8
 
+    # saving session on login/registration
     def start_session(self, user):
         del user["password"]
         session["logged_in"] = True
         session["user"] = user
         return jsonify(user), 200
+    
+    # verifying email
+    def verifyEmail(self, db):
+        data = dict(request.json)
+        email = data["email"]
+
+        user = db.users.find_one({"email": email})
+        print(user)
+        if user:
+            db.users.update_one({"_id": user["_id"]}, {'$set': {"verified": True}})
+            return jsonify({"Success": "Email has successfully been verified"}), 200
+        else:
+            return jsonify({"Error": "User does not exist"}), 400
 
     def register(self, db):
         # the response data

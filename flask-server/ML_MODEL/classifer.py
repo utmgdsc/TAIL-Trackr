@@ -132,7 +132,7 @@ def classify(imageData):
             print(f)
         
         return {'Breed' : val,
-                'Features' : ", ".join(features.split(" ")),
+                'Features' : features,
                 'Animal' : 'Dog'}
         
     elif predicted_class == 9:

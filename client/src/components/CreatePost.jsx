@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useGeolocated } from "react-geolocated";
 import "./CreatePost.css";
-import { useSelector } from "react-redux";
-import MyList from "./MyList";
 
 function CreatePost() {
   const [selectedImage, setSelectedImage] = useState(null);
@@ -15,19 +13,10 @@ function CreatePost() {
   const [breed, setBreed] = useState("");
   const [animal, setAnimal] = useState("");
   const baseURL = "http://127.0.0.1:5000"
-  // const email = JSON.parse(useSelector((state) => state.user.value)).email
-  const email = "inaam"
 
-  console.log(email)
-  const phoneRegex = /^\d{3}-\d{3}-\d{4}$/;
+  console.log(localStorage.getItem("user"))
   const handleSubmit = async () => {
     setError(null)
-
-    if (!phoneRegex.test(userPhone)) {
-      setError("Please enter a valid phone number in the format XXX-XXX-XXXX");
-      return;
-    }
-
     if (selectedImage && latitude && longitude && selectedAnimalStatus && description) {
         if (!breed) {
           await classify();
@@ -56,11 +45,11 @@ function CreatePost() {
         // "colour": data["data"]["colour"],
         // "size": data["data"]["size"],
         // "weight": data["data"]["weight"]
-
+        console.log(JSON.parse(JSON.parse(localStorage.getItem("user")).user.value).email)
         // combining form data
         const data = {
             image: imageByteCode,
-            userEmail: email,
+            userEmail: JSON.parse(JSON.parse(localStorage.getItem("user")).user.value).email,
             location: {latitude: latitude, longitude: longitude},
             animalStatus: selectedAnimalStatus,
             userDescription: description,
@@ -72,7 +61,7 @@ function CreatePost() {
         // uploading all data
         const response = await fetch(baseURL + "/api/upload/", {
             method: "POST",
-            credentials: "include",
+            //credentials: "include",
             headers: {
                 "Content-Type": "application/json",
             },
@@ -132,7 +121,7 @@ const classify = async (event) => {
             alert("Enter a dog or cat")
             setSelectedImage(null)
           } else {
-            if (description != ""){
+            if (description !== ""){
               setDescription(description + ", " + json['Features'])
             } else {
               setDescription(json['Features'])
@@ -186,7 +175,7 @@ const classify = async (event) => {
   }, [coords]);
 
   return (
-    <div className="App-Main1">
+    <div className="App-Main">
       {/* Top Form */}
       <div className="top-form">
         {error && <div className="error-message">The following error has occurred: {error}</div>}
@@ -206,24 +195,20 @@ const classify = async (event) => {
           </div>
           <input
             type="file"
-            className="file-inp"
             name="myImage"
             onChange={(event) => {
               console.log(event.target.files[0]);
               setSelectedImage(event.target.files[0]);
             }}
           />
-          {/* <label for="imageInput" className="file-label">
-              Choose Image
-         </label> */}
-          <button className="btn-class" onClick={classify}>Get Features</button>
+          <button onClick={classify}>Get Features</button>
           {/* Geolocation */}
           {!isGeolocationAvailable ? (
             <div>Your browser does not allow location, please enter your location manually:</div>
           ) : !isGeolocationEnabled ? (
-            <div className="loc-dis">Location is not enabled</div>
+            <div>Location is not enabled</div>
           ) : coords ? (
-            <div className="loc-en">Location received</div>
+            <div>Location received</div>
           ) : (
             <div>Getting the location data</div>
           )}
@@ -234,8 +219,7 @@ const classify = async (event) => {
       <div className="bottom-form">
         {/* Animal Status Radio Buttons */}
         <div className="animal-status-radio-buttons">
-          <h2>Animal Status:</h2>
-          <div className="animals-stat">
+          <h2>Choose an Option:</h2>
           <label>
             <input
               type="radio"
@@ -263,7 +247,6 @@ const classify = async (event) => {
             />
             Don't Know
           </label>
-          </div>
         </div>
   
         {/* Additional Information */}
@@ -278,13 +261,11 @@ const classify = async (event) => {
           </label>
   
           <label>
-            Enter your Phone Number (XXX-XXX-XXXX)
+            Enter your phone number/email
             <input
               type="text"
               value={userPhone}
               onChange={handlePhoneChange}
-              className={error ? "error-input" : ""} // Apply the class conditionally
-
             />
           </label>
         </div>

@@ -70,5 +70,25 @@
     margin: 0;
     padding: 0;
     width: 130%;
-  
+    
   }
+
+  .button-log{
+    text-decoration: none;
+    font-size: 18px;
+    font-weight: bold;
+    color: #FFFFFF;
+    margin: 0;
+    padding: 0;
+    background-color: #ffffff00;
+  }
+
+    /* Add hover effect */
+    .button-log:hover {
+      font-weight: bold;
+      font-size: 24;
+      transform: scale(1.1);
+      transition-duration: 300ms;
+      transition-timing-function: ease-in-out;
+      color: #4dc020; /* Change text color on hover */
+    }

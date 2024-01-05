@@ -55,7 +55,7 @@ function NavBar() {
           <>
             {/* Logged in, show logout button*/}
             <li>
-              <button onClick={handleSubmit}>Logout</button>
+              <button className='button-log' onClick={handleSubmit}>Logout</button>
             </li>
           </>
         ) : (

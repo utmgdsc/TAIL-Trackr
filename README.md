@@ -22,6 +22,8 @@ As aforementioned, there is a lack of real-time, community-driven solutions to a
 
 **Inaam Azeezur-Rahman**: Software Engineer, experienced in Python, Javascript and related web frameworks. Completed internships in the past regarding web-development and cybersecurity.
 
+**Muhammad Hamza**: Software Engineer and MCSS TA, expert in python, JavaScript, C/C++ and ML.  Worked on projects related to computer vision.
+
 ## Timeline
 
 **Month 1**: Functional dog breed model + basics of the UI/UX

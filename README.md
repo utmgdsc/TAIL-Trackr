@@ -37,7 +37,7 @@ As aforementioned, there is a lack of real-time, community-driven solutions to a
 
 ## Documentation
 
-All of the design choices made for Tail-TrackR can be found in the documentation [here](https://drive.google.com/file/d/1IqMZ8J38FCWrdh23JKehvJMs9rVCrUF2/view?usp=sharing).
+All of the design choices made for Tail-TrackR can be found in the documentation [here](https://drive.google.com/file/d/1_XVdl1DO_IMIiKg-pil5Zyb8FnVQULau/view?usp=sharing).
 
 ## How to deploy
 

@@ -18,6 +18,7 @@ export default class Home extends Component {
               <MainPage />
               <Features />
               <Tips />
+\
             </div>
           );
     }

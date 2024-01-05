@@ -1,0 +1,50 @@
+.txt-title{
+    margin-top: 10%;
+    font-weight: 800;
+    font-size: 30px;
+}
+.shel-main {
+    max-width: 800px;
+    margin: auto;
+    padding: 20px;
+  }
+  
+  .shelter-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+  }
+  
+  .shelter-post {
+    background-color: #f8f8f8;
+    border: 1px solid #ddd;
+    padding: 20px;
+    border-radius: 8px;
+    transition: transform 0.3s;
+  }
+  
+  .shelter-post:hover {
+    transform: scale(1.05);
+  }
+  
+  .shelter-name {
+    font-size: 1.5em;
+    margin-bottom: 10px;
+    color: #333;
+  }
+  
+  .shelter-location {
+    color: #555;
+  }
+  
+  .shelter-link {
+    color: #007bff;
+    text-decoration: none;
+    display: block;
+    margin-top: 10px;
+  }
+  
+  .shelter-link:hover {
+    text-decoration: underline;
+  }
+  

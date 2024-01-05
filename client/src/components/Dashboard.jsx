@@ -9,6 +9,7 @@ import { useGeolocated } from "react-geolocated";
 export default function Dashboard() {
   const [currentPage, setCurrentPage] = useState(1);
   const [latitude, setLatitude] = useState(null);
+  const [searchTerm, setSearchTerm] = useState('');
   const [longitude, setLongitude] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const postsPerPage = 9;
@@ -99,28 +100,40 @@ export default function Dashboard() {
       if (!latitude || !longitude) {
         return [];
       }
-  
+    
       const startIndex = (currentPage - 1) * postsPerPage;
       const endIndex = startIndex + postsPerPage;
       const slicedData = animalData.slice(startIndex, endIndex);
-  
+    
+      const searchTermArray = searchTerm.toLowerCase().split(/\s+/);
+
       const filteredAndSortedData = slicedData
-        .filter((item) => {
-          const isAnimalMatch =
-            selectedAnimal === "All" || selectedAnimal === "Animal" || item.animal === selectedAnimal;
-          const isBreedMatch = selectedBreed === "All" || selectedBreed === "Breed" || item.breed === selectedBreed;
-  
-          return isAnimalMatch && isBreedMatch;
-        })
-        .map((item) => {
-          const distance = haversineDistance([latitude, longitude], [item.latitude, item.longitude]);
-          return { ...item, distance };
-        })
-        .sort((a, b) => parseFloat(a.distance) - parseFloat(b.distance))
-        .map((item, index) => ({ ...item, index: index + startIndex }));
-  
+      .filter((item) => {
+        const isAnimalMatch = selectedAnimal === "All" || selectedAnimal === "Animal" || item.animal === selectedAnimal;
+        const isBreedMatch = selectedBreed === "All" || selectedBreed === "Breed" || item.breed === selectedBreed;
+
+        // Check if any of the search terms are present in userDescription
+        const isDescriptionMatch = searchTermArray.every((term) => {
+          // Check if item.userDescription is a string before performing operations
+          const isString = typeof item.userDescription === 'string';
+          const isMatch = isString && item.userDescription.toLowerCase().includes(term.toLowerCase());
+          return isString ? isMatch : false; // Return false for non-string userDescription
+        });
+
+        return isAnimalMatch && isBreedMatch && isDescriptionMatch;
+      })
+      .map((item) => {
+        const distance = haversineDistance([latitude, longitude], [item.latitude, item.longitude]);
+        return { ...item, distance };
+      })
+      .sort((a, b) => parseFloat(a.distance) - parseFloat(b.distance))
+      .map((item, index) => ({ ...item, index: index + startIndex }));
+
       return filteredAndSortedData;
-    };
+      };
+
+    
+    
     
     // Get the filtered and sorted data
     const filteredAndSortedData = filterData();
@@ -145,6 +158,13 @@ export default function Dashboard() {
           <>
             <div className="App-dropdowns">
                 <Dropdown options={options} isActive={isActiveAnimal} setIsActive={setIsActiveAnimal} selected={selectedAnimal} setSelected={setSelectedAnimal} />
+                <input 
+                  className="user-inp"
+                  type="text"
+                  placeholder="Search by description..."
+                  value={searchTerm}
+                  onChange={(e) => setSearchTerm(e.target.value)}
+                />
                 <Dropdown options={breed_options} isActive={isActiveBreed} setIsActive={setIsActiveBreed} selected={selectedBreed} setSelected={setSelectedBreed} />
             </div>
 

@@ -1,5 +1,5 @@
 import React from 'react';
-import { FaDog } from "react-icons/fa6";
+import { FaCircle, FaDog } from "react-icons/fa6";
 import { FaPhone } from "react-icons/fa";
 import { FaRocket } from "react-icons/fa"
 import { FaSquare } from "react-icons/fa";
@@ -25,6 +25,10 @@ const Card = ( props ) => {
               <div className='displayStack__0'>
                   <FaSquare classNam="dog_icon" icon="fa-solid fa-paw" />
                   <div className='animals-content'>Breed: {props.data.breed}</div>
+              </div>
+              <div className='displayStack__0'>
+                  <FaCircle classNam="dog_icon" icon="fa-solid fa-paw" />
+                  <div className='animals-content'>Description: {props.data.userDescription.replace(/,/g, " ")} </div>
               </div>
               <div className='displayStack__0'>
                   <FaPhone classNam="dog_icon" icon="fa-solid fa-paw" />

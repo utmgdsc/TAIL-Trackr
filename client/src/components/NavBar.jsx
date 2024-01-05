@@ -47,6 +47,10 @@ function NavBar() {
         <li>
           <Link to='/dashboard'>Dashboard</Link>
         </li>
+        <li>
+          <Link to='/shelters'>Animal Shelters</Link>
+        </li>
+        
         {user ? (
           <>
             {/* Logged in, show logout button*/}

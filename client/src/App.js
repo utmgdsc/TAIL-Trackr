@@ -11,6 +11,7 @@ import Dashboard from "./components/Dashboard";
 import EmailVerif from "./components/EmailVerif";
 import EmailCheck from "./components/EmailCheck";
 import { useSelector } from "react-redux";
+import Shelters from "./components/Shelters";
 
 // app component will control all routes within our program
 function App() {
@@ -30,6 +31,7 @@ function App() {
               <Route path="/login" element={<Login />} />
               <Route path="/register" element={<Register />} />
               <Route path="/new-post" element={<NewPostPage />} />
+              <Route path="/shelters" element={<Shelters />} />
               {/* <Route path="/create-post" element={<CreatePost />} /> */}
               <Route path="/create-post" element={ verified ? ( <CreatePost /> ) : ( user ? (<Navigate to="/email-verification" />) : (<Navigate to="/" />))}/>
               {/* <Route path="/dashboard" element={<Dashboard />} /> */}

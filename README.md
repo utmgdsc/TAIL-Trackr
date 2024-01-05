@@ -24,6 +24,8 @@ As aforementioned, there is a lack of real-time, community-driven solutions to a
 
 **Muhammad Hamza**: Software Engineer and MCSS TA, expert in python, JavaScript, C/C++ and ML.  Worked on projects related to computer vision.
 
+**Dev Vora**: Software developer: Full stack developer, CS TA, back-end specialist, proficient in Python (web frameworks & data technologies) and Javascript (MERN)
+
 ## Timeline
 
 **Month 1**: Functional dog breed model + basics of the UI/UX

@@ -29,6 +29,11 @@ As aforementioned, there is a lack of real-time, community-driven solutions to a
 **Month 3**: Pipeline ML models with animal classification + connect ML model to frontend + user authentication (email verification) + use Google Maps API for location 
 
 
+## Documentation
+
+All of the design choices made for Tail-TrackR can be found in the documentation [here](https://drive.google.com/file/d/1IqMZ8J38FCWrdh23JKehvJMs9rVCrUF2/view?usp=sharing).
+
+
 
 
 

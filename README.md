@@ -20,6 +20,8 @@ As aforementioned, there is a lack of real-time, community-driven solutions to a
 
 **Dev Shah**: ML researcher @ UofT, Director @ UofT AI, Assistant VP of Engineering @ UTMIST, Prev. ML Engineer @ Interactions, ML Developer @ PhotoML, Research Intern @ Interac
 
+**Inaam Azeezur-Rahman**: Software Engineer, experienced in Python, Javascript and related web frameworks. Completed internships in the past regarding web-development and cybersecurity.
+
 ## Timeline
 
 **Month 1**: Functional dog breed model + basics of the UI/UX

@@ -12,9 +12,23 @@ As aforementioned, there is a lack of real-time, community-driven solutions to a
 
 **Languages**: Javascript, Python 
 
-**Frameworks**: React, Flask
+**Frameworks**: React, Flask, Tensorflow, PyTorch
 
 **Database**: MongoDB
+
+## Team Members
+
+**Dev Shah**: ML researcher @ UofT, Director @ UofT AI, Assistant VP of Engineering @ UTMIST, Prev. ML Engineer @ Interactions, ML Developer @ PhotoML, Research Intern @ Interac
+
+## Timeline
+
+Month 1: Functional dog breed model + basics of the UI/UX
+
+Month 2: Implement user dashboard + cat breed model + allow users to create posts
+
+Month 3: Pipeline ML models with animal classification + connect ML model to frontend + user authentication (email verification) + use Google Maps API for location 
+
+
 
 
 

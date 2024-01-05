@@ -1,5 +1,5 @@
 {
-    "short": [
+    "short fur": [
       "American Hairless",
       "Basset",
       "Beagle",
@@ -33,7 +33,7 @@
       "Vizsla",
       "Yorkie"
     ],
-    "medium": [
+    "medium fur": [
       "American Spaniel",
       "Bermaise",
       "Bichon Frise",
@@ -56,7 +56,7 @@
       "Schnauzer",
       "Siberian Husky"
     ],
-    "long": [
+    "long fur": [
       "Afghan",
       "African Wild Dog",
       "Airedale",

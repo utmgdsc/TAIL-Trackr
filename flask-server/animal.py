@@ -19,7 +19,6 @@ class Animal:
 
         # this line contains the form data
         data = dict(request.json)
-
         new_post = {
             "_id": uuid.uuid4().hex,
             "uploader": data["data"]["userEmail"],

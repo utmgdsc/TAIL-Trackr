@@ -22,11 +22,11 @@ As aforementioned, there is a lack of real-time, community-driven solutions to a
 
 ## Timeline
 
-Month 1: Functional dog breed model + basics of the UI/UX
+**Month 1**: Functional dog breed model + basics of the UI/UX
 
-Month 2: Implement user dashboard + cat breed model + allow users to create posts
+**Month 2**: Implement user dashboard + cat breed model + allow users to create posts
 
-Month 3: Pipeline ML models with animal classification + connect ML model to frontend + user authentication (email verification) + use Google Maps API for location 
+**Month 3**: Pipeline ML models with animal classification + connect ML model to frontend + user authentication (email verification) + use Google Maps API for location 
 
 
 

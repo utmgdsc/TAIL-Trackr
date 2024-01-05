@@ -41,6 +41,9 @@ All of the design choices made for Tail-TrackR can be found in the documentation
 
 ## How to deploy
 
+Before deploying, ensure that you have node and npm installed on your machine. For reference, check [here](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm). Also install nvm, for reference, here is how to [install](https://tecadmin.net/install-nvm-macos-with-homebrew/). 
+
+
 ```
 git clone https://github.com/utmgdsc/TAIL-Trackr.git
 ```
@@ -64,6 +67,8 @@ Then enter "cd ../client" into the terminal.
 npm i
 npm start
 ```
+
+
 
 
 

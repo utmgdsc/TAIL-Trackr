@@ -10,8 +10,10 @@ As aforementioned, there is a lack of real-time, community-driven solutions to a
 
 ## Technical Stack
 
-**Languages**: Javascript, Python \\
-**Frameworks**: React, Flask \\
+**Languages**: Javascript, Python 
+
+**Frameworks**: React, Flask
+
 **Database**: MongoDB
 
 

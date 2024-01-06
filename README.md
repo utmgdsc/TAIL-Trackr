@@ -37,7 +37,42 @@ As aforementioned, there is a lack of real-time, community-driven solutions to a
 
 ## Documentation
 
-All of the design choices made for Tail-TrackR can be found in the documentation [here](https://drive.google.com/file/d/1IqMZ8J38FCWrdh23JKehvJMs9rVCrUF2/view?usp=sharing).
+All of the design choices made for Tail-TrackR can be found in the documentation [here](https://drive.google.com/file/d/1_XVdl1DO_IMIiKg-pil5Zyb8FnVQULau/view?usp=sharing).
+
+## How to deploy
+
+Before deploying, ensure that you have node and npm installed on your machine. For reference, check [here](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm). Also install nvm, for reference, here is how to [install](https://tecadmin.net/install-nvm-macos-with-homebrew/). 
+
+
+```
+git clone https://github.com/utmgdsc/TAIL-Trackr.git
+```
+
+cd into ML MODEL and do the following:
+
+```
+pip install -r requirements.txt
+```
+
+Then enter "cd ../flask-server" into the terminal (note: do not enter the quotes).
+
+```
+pip install -r requirements.txt
+python3 server.py
+```
+
+Then enter "cd ../client" into the terminal.
+
+```
+npm i
+npm start
+```
+
+
+
+
+
+
 
 
 
